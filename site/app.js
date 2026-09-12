@@ -1,4 +1,4 @@
-/* Idea X quiz-funnel clone — flow logic.
+/* tryivio.com quiz-funnel clone — flow logic.
    One page, four screens: start → quiz → analyzing → result.
    Answers live in sessionStorage under "q-*" keys, exactly like the original,
    so the summary slide and the paywall can mirror them back.
@@ -297,7 +297,7 @@
       });
     }));
 
-    $$('[data-legal]', root).forEach(a => a.addEventListener('click', e => e.preventDefault()));
+    // legal links now point at real pages, so they are left alone to navigate
 
     function enter() {
       currency();

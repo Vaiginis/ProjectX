@@ -1,4 +1,4 @@
-/* Extracted from Idea X.webflow.shared.css — only the rules these four pages use. */
+/* Extracted from tryivio.com.webflow.shared.css — only the rules these four pages use. */
 html {-webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   font-family: sans-serif;}
@@ -208,7 +208,7 @@ textarea.w-input {height: auto;}
   --gray-90: #18181a;
   --rose-1: #fef6f7;
   --gray-9: #464e62;
-  --font-family-ideax: Geist, sans-serif;
+  --font-family-ivio: Geist, sans-serif;
   --gray-15: #ededf2;
   --white: white;
   --candy-grape-fizz: #7852f4;
@@ -251,7 +251,7 @@ textarea.w-input {height: auto;}
   --azure-7: #05a8ff;
   --brand-1: #f8f7fe;
   --green-2: #e8fcee;
-  --Idea X-black: #131316;
+  --ivio-black: #131316;
   --gray-40: #8e8f96;
   --gray-30: #b6b6bc;
   --gray-5-old: #fafbfd;
@@ -658,7 +658,7 @@ body {font-family: var(--font-family);
   font-weight: 400;
   line-height: 20px;
   text-decoration: none;}
-.boolean-text.v2 {font-family: var(--font-family-ideax);
+.boolean-text.v2 {font-family: var(--font-family-ivio);
   color: var(--gray-9);
   letter-spacing: -.125px;
   font-size: 18px;
@@ -920,19 +920,19 @@ body {font-family: var(--font-family);
 .answer-summary-text {color: var(--gray-9);
   font-family: Geist, sans-serif;
   font-weight: 500;}
-.answer-summary-text.v2 {font-family: var(--font-family-ideax);
+.answer-summary-text.v2 {font-family: var(--font-family-ivio);
   font-size: 16px;}
 .answer-item-text {color: var(--gray-10);
   white-space: nowrap;
   font-family: Geist, sans-serif;
   font-weight: 400;}
-.answer-item-text.v2 {font-family: var(--font-family-ideax);
+.answer-item-text.v2 {font-family: var(--font-family-ivio);
   font-size: 16px;}
 .answers-list-container {flex-flow: column;
   justify-content: flex-start;
   align-items: flex-end;
   display: flex;}
-.ideax-button {grid-column-gap: .5rem;
+.ivio-button {grid-column-gap: .5rem;
   aspect-ratio: auto;
   color: #fff;
   text-align: center;
@@ -954,33 +954,33 @@ body {font-family: var(--font-family);
   transition: all .3s;
   display: flex;
   box-shadow: 0 1px 2px #1018280d;}
-.ideax-button:hover {background-color: #6843e4;
+.ivio-button:hover {background-color: #6843e4;
   border-color: #6843e4;}
-.ideax-button:active {background-color: #5932d9;
+.ivio-button:active {background-color: #5932d9;
   border-color: #5932d9;}
-.ideax-button:focus {background-color: #5932d9;
+.ivio-button:focus {background-color: #5932d9;
   border-color: #5932d9;
   box-shadow: 0 1px 2px #1018280d, 0 0 0 4px #5932d91f;}
-.ideax-button._3d-ui._64px.white {background-color: var(--white);}
-.ideax-button._3d-ui._64px.level-option {grid-column-gap: 4px;}
-.ideax-button._3d-ui.hide {display: none;}
-.ideax-button._3d-ui.orange {width: 100%;}
-.ideax-button._3d-ui {border-width: 2px;
+.ivio-button._3d-ui._64px.white {background-color: var(--white);}
+.ivio-button._3d-ui._64px.level-option {grid-column-gap: 4px;}
+.ivio-button._3d-ui.hide {display: none;}
+.ivio-button._3d-ui.orange {width: 100%;}
+.ivio-button._3d-ui {border-width: 2px;
   border-color: #633eda;
   border-radius: 1rem;
   margin-bottom: 4px;
   box-shadow: 0 4px #633eda;}
-.ideax-button._3d-ui:hover {background-color: #704bec;}
-.ideax-button._3d-ui:active {background-color: #633eda;
+.ivio-button._3d-ui:hover {background-color: #704bec;}
+.ivio-button._3d-ui:active {background-color: #633eda;
   box-shadow: 0 4px #633eda;}
-.ideax-button._3d-ui:focus {background-color: #633eda;}
-.ideax-button._3d-ui._64px {border-radius: 18px;
+.ivio-button._3d-ui:focus {background-color: #633eda;}
+.ivio-button._3d-ui._64px {border-radius: 18px;
   height: 64px;}
-.ideax-button.white {border-color: var(--white);
+.ivio-button.white {border-color: var(--white);
   background-color: var(--white);
   height: 64px;
   color: var(--gray-11);}
-.ideax-button.white:hover {background-color: var(--gray-2);}
+.ivio-button.white:hover {background-color: var(--gray-2);}
 .special-offer-rose {background-color: #f24f87;
   border: 2px solid #d11f61;
   border-radius: 8px;
@@ -990,7 +990,7 @@ body {font-family: var(--font-family);
   display: flex;
   position: absolute;
   inset: -24px 20px auto auto;}
-.ideax-logo {width: 88px;
+.ivio-logo {width: 88px;
   height: 32px;}
 .teal {color: var(--teal-7);}
 .uui-text-size-small-geist {color: #475467;
@@ -998,7 +998,7 @@ body {font-family: var(--font-family);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   font-size: .875rem;
   line-height: 1.5;}
-.uui-text-size-small-geist.gray {font-family: var(--font-family-ideax);
+.uui-text-size-small-geist.gray {font-family: var(--font-family-ivio);
   color: #98a2b3;}
 .uui-text-size-small-geist.gray.center-footer {text-align: center;
   flex: none;}
@@ -1034,7 +1034,7 @@ body {font-family: var(--font-family);
 .modal-container.exitui {max-width: 432px;}
 .icon-28px {width: 28px;
   height: 28px;}
-.geist-36px {font-family: var(--font-family-ideax);
+.geist-36px {font-family: var(--font-family-ivio);
   color: var(--gray-11);
   margin-top: 0;
   margin-bottom: 0;
@@ -1045,7 +1045,7 @@ body {font-family: var(--font-family);
   font-style: normal;}
 .geist-36px.purple-text {color: var(--brand-7);}
 .geist-36px._28-mobile.center.max-width {max-width: 580px;}
-.geist-14px {font-family: var(--font-family-ideax);
+.geist-14px {font-family: var(--font-family-ivio);
   color: var(--gray-10);
   text-align: left;
   font-size: 14px;
@@ -1072,7 +1072,7 @@ body {font-family: var(--font-family);
   top: -4px;
   left: auto;
   right: -4px;}
-.geist-22-px {font-family: var(--font-family-ideax);
+.geist-22-px {font-family: var(--font-family-ivio);
   color: var(--gray-10);
   text-align: left;
   letter-spacing: normal;
@@ -1084,7 +1084,7 @@ body {font-family: var(--font-family);
   line-height: 130%;}
 .geist-22-px.white {color: var(--white);}
 .geist-22-px.center {text-align: center;}
-.geist-26px {font-family: var(--font-family-ideax);
+.geist-26px {font-family: var(--font-family-ivio);
   color: var(--gray-11);
   margin-top: 0;
   margin-bottom: 0;
@@ -1110,7 +1110,7 @@ body {font-family: var(--font-family);
   align-items: center;
   width: 480px;
   display: flex;}
-.geist-16px {font-family: var(--font-family-ideax);
+.geist-16px {font-family: var(--font-family-ivio);
   color: var(--gray-10);
   text-align: left;
   font-size: 16px;
@@ -1145,7 +1145,7 @@ body {font-family: var(--font-family);
   font-weight: 500;}
 .geist-16px.white {color: var(--white);}
 .geist-16px.dynamic-value {display: none;}
-.geist-18-px {font-family: var(--font-family-ideax);
+.geist-18-px {font-family: var(--font-family-ivio);
   color: var(--gray-9);
   text-align: left;
   letter-spacing: normal;
@@ -1183,7 +1183,7 @@ body {font-family: var(--font-family);
   align-items: center;
   height: 100%;}
 .quiz-h1 {width: 100%;
-  font-family: var(--font-family-ideax);
+  font-family: var(--font-family-ivio);
   color: var(--gray-11);
   text-align: center;
   margin-top: 0;
@@ -1195,7 +1195,7 @@ body {font-family: var(--font-family);
 .quiz-h1._28-mobile {font-size: 36px;}
 .quiz-h1._38px-claude {font-size: 38px;}
 .quiz-p1 {width: 100%;
-  font-family: var(--font-family-ideax);
+  font-family: var(--font-family-ivio);
   color: var(--gray-6);
   text-align: center;
   letter-spacing: -.01em;
@@ -1211,7 +1211,7 @@ body {font-family: var(--font-family);
 .quiz-p1.purple-text {color: var(--candy-grape-fizz);}
 .quiz-p1.default {color: var(--gray-9);}
 .quiz-h3 {width: 100%;
-  font-family: var(--font-family-ideax);
+  font-family: var(--font-family-ivio);
   color: var(--gray-11);
   text-align: center;
   flex-flow: column;
@@ -1224,7 +1224,7 @@ body {font-family: var(--font-family);
   line-height: 140%;
   text-decoration: none;}
 .quiz-answer-hero {width: 100%;
-  font-family: var(--font-family-ideax);
+  font-family: var(--font-family-ivio);
   color: var(--white);
   text-align: left;
   flex-flow: column;
@@ -1239,7 +1239,7 @@ body {font-family: var(--font-family);
 .quiz-answer-hero.ui-button-purple {text-transform: uppercase;
   font-size: 20px;}
 .quiz-consent-text {width: 100%;
-  font-family: var(--font-family-ideax);
+  font-family: var(--font-family-ivio);
   color: var(--gray-6);
   text-align: center;
   flex-flow: column;
@@ -1249,7 +1249,7 @@ body {font-family: var(--font-family);
   font-weight: 400;
   line-height: 20px;
   text-decoration: none;}
-.quiz-stepper-text {font-family: var(--font-family-ideax);
+.quiz-stepper-text {font-family: var(--font-family-ivio);
   color: var(--gray-11);
   margin-top: 0;
   margin-bottom: 0;
@@ -1259,7 +1259,7 @@ body {font-family: var(--font-family);
   text-decoration: none;}
 .quiz-stepper-text.hidden {display: none;}
 .quiz-h2 {width: 100%;
-  font-family: var(--font-family-ideax);
+  font-family: var(--font-family-ivio);
   color: var(--gray-11);
   text-align: center;
   margin-top: 0;
@@ -1269,7 +1269,7 @@ body {font-family: var(--font-family);
   font-weight: 600;
   line-height: 130%;}
 .quiz-p2 {width: 100%;
-  font-family: var(--font-family-ideax);
+  font-family: var(--font-family-ivio);
   color: var(--gray-6);
   text-align: center;
   flex-flow: column;
@@ -1286,7 +1286,7 @@ body {font-family: var(--font-family);
   line-height: 21px;}
 .quiz-p2.secondary {color: var(--gray-9);}
 .quiz-p2.hidden {display: none;}
-.geist-h1 {font-family: var(--font-family-ideax);
+.geist-h1 {font-family: var(--font-family-ivio);
   color: var(--gray-90);
   margin-top: 0;
   margin-bottom: 0;
@@ -1312,14 +1312,14 @@ body {font-family: var(--font-family);
   top: -3px;
   bottom: 0;
   right: -3px;}
-.best-fit-tag-text-bigger {font-family: var(--font-family-ideax);
+.best-fit-tag-text-bigger {font-family: var(--font-family-ivio);
   color: #fff;
   font-size: 16px;
   font-weight: 400;
   line-height: 18px;
   display: block;}
 .semibold {font-weight: 600;}
-.button-text-pricing {font-family: var(--font-family-ideax);
+.button-text-pricing {font-family: var(--font-family-ivio);
   font-size: 18px;
   font-weight: 500;}
 .guarantee-pricing {background-color: #fff;
@@ -1394,7 +1394,7 @@ body {font-family: var(--font-family);
 .section-hero.data-analyst {grid-column-gap: 24px;
   grid-row-gap: 24px;
   padding-bottom: 24px;}
-.geist-18px {font-family: var(--font-family-ideax);
+.geist-18px {font-family: var(--font-family-ivio);
   color: var(--gray-10);
   text-align: left;
   font-size: 18px;
@@ -1680,7 +1680,7 @@ body {font-family: var(--font-family);
   width: 92px;
   height: 52px;
   display: flex;}
-.geist-pricing-price {font-family: var(--font-family-ideax);
+.geist-pricing-price {font-family: var(--font-family-ivio);
   color: var(--gray-10);
   text-align: left;
   margin-top: 0;
@@ -1690,7 +1690,7 @@ body {font-family: var(--font-family);
   line-height: 110%;}
 .geist-pricing-price.white {color: var(--white);}
 .geist-pricing-price.default {color: var(--gray-11);}
-.geist-20-px {font-family: var(--font-family-ideax);
+.geist-20-px {font-family: var(--font-family-ivio);
   color: var(--gray-10);
   text-align: left;
   letter-spacing: normal;
@@ -1860,7 +1860,7 @@ body {font-family: var(--font-family);
   min-width: 48px;
   height: 48px;}
 .option_text {width: 100%;
-  font-family: var(--font-family-ideax);
+  font-family: var(--font-family-ivio);
   color: var(--gray-9);
   letter-spacing: -.125px;
   flex-flow: column;
@@ -1904,7 +1904,7 @@ body {font-family: var(--font-family);
   text-decoration: none;
   display: flex;
   position: relative;}
-.quiz_button_text {font-family: var(--font-family-ideax);
+.quiz_button_text {font-family: var(--font-family-ivio);
   color: var(--white);
   flex-direction: row;
   justify-content: center;
@@ -2084,7 +2084,7 @@ body {font-family: var(--font-family);
   width: 100%;
   display: flex;}
 .div-block-254 {width: 100%;}
-.geist-32px {font-family: var(--font-family-ideax);
+.geist-32px {font-family: var(--font-family-ivio);
   color: var(--gray-11);
   text-align: center;
   margin-top: 0;
@@ -2289,12 +2289,12 @@ body {font-family: var(--font-family);
   .quiz-body-hero {padding-top: 72px;
     padding-left: 32px;
     padding-right: 32px;}
-  .ideax-button {font-size: 1rem;}
-  .ideax-button._3d-ui.orange {background-color: var(--orange-7);
+  .ivio-button {font-size: 1rem;}
+  .ivio-button._3d-ui.orange {background-color: var(--orange-7);
     border-color: #d63900;
     display: none;
     box-shadow: 0 4px #d63900;}
-  .ideax-button._3d-ui.orange.get-started-cta.show {display: flex;}
+  .ivio-button._3d-ui.orange.get-started-cta.show {display: flex;}
   .geist-36px.center {font-size: 28px;}
   .geist-36px.center.max-width {max-width: 400px;}
   .geist-36px.purple-text._28-mobile, .geist-36px._28-mobile {font-size: 28px;}
@@ -2425,10 +2425,10 @@ body {font-family: var(--font-family);
     width: 100%;
     position: static;}
   .answer-summary-text {width: 112px;}
-  .ideax-button._3d-ui.orange {background-color: var(--orange-7);
+  .ivio-button._3d-ui.orange {background-color: var(--orange-7);
     border-color: #d63900;
     box-shadow: 0 4px #d63900;}
-  .ideax-button.get-started-cta {flex: 0 auto;
+  .ivio-button.get-started-cta {flex: 0 auto;
     align-self: center;
     width: 100%;}
   .uui-text-size-small-geist.gray.center-footer {flex: 1;}

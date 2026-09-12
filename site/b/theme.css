@@ -37,7 +37,7 @@
 
   /* --- remap variant A's tokens onto the new system ----------------------- */
   --font-family: var(--font-din-round);
-  --font-family-ideax: var(--font-din-round);
+  --font-family-ivio: var(--font-din-round);
 
   --candy-grape-fizz: var(--color-ecto-green);
   --brand-7: var(--color-ecto-green);
@@ -128,7 +128,7 @@ body, button, input, select, textarea,
 /* ---------------------------------------------------------------------------
    3. One radius
    ------------------------------------------------------------------------ */
-.ideax-button, .quiz_button, .radio_option, .checkbox_option, .boolean-option,
+.ivio-button, .quiz_button, .radio_option, .checkbox_option, .boolean-option,
 .pricing-radio-card, .pricing-cta, .option_icon_container, .answear_icon_container,
 .ck-panel, .ck-plan, .ck-input, .ck-continue, .quiz_image, .review-v2,
 .money-back-badge, .uui-badge-small-success-2, .price-tag, .price-tag-container,
@@ -185,7 +185,7 @@ body, button, input, select, textarea,
 /* ---------------------------------------------------------------------------
    5. Buttons — filled green with a solid pressable edge underneath
    ------------------------------------------------------------------------ */
-.ideax-button,
+.ivio-button,
 .quiz_button {
   font-family: var(--font-din-round);
   font-weight: 800;
@@ -198,25 +198,25 @@ body, button, input, select, textarea,
   color: var(--color-paper);
   transition: transform .06s ease, background-color .12s ease;
 }
-.ideax-button:hover, .quiz_button:hover { background-color: #61d904; border-color: #61d904; border-bottom-color: var(--color-ecto-press); }
-.ideax-button:active, .quiz_button:active {
+.ivio-button:hover, .quiz_button:hover { background-color: #61d904; border-color: #61d904; border-bottom-color: var(--color-ecto-press); }
+.ivio-button:active, .quiz_button:active {
   background-color: var(--color-ecto-press);
   border-color: var(--color-ecto-press);
   border-bottom-width: 2px;
   transform: translateY(3px);
 }
-.ideax-button._3d-ui { margin-bottom: 0; }
+.ivio-button._3d-ui { margin-bottom: 0; }
 
 /* ghost / secondary — the border IS the identity */
-.ideax-button.white,
-.ideax-button._3d-ui._64px.white,
+.ivio-button.white,
+.ivio-button._3d-ui._64px.white,
 .quiz_button.secondary {
   background-color: var(--color-paper);
   border: 2px solid var(--color-lingot-lime);
   border-bottom: 5px solid var(--color-lingot-lime);
   color: var(--color-ecto-green);
 }
-.ideax-button.white:hover, .quiz_button.secondary:hover { background-color: #f6ffee; border-color: var(--color-lingot-lime); }
+.ivio-button.white:hover, .quiz_button.secondary:hover { background-color: #f6ffee; border-color: var(--color-lingot-lime); }
 
 /* the disabled next button keeps its shape, drops its colour */
 .quiz_button.disabled, .quiz_button._w-margins.disabled {
@@ -438,11 +438,11 @@ body, button, input, select, textarea,
    Variant A styles several of these with two- and three-class selectors, so a
    single-class override in section 5 loses. Same rules, matched weight.
    ------------------------------------------------------------------------ */
-.ideax-button._3d-ui,
-.ideax-button._3d-ui._64px,
-.ideax-button._3d-ui.orange,
-.ideax-button._3d-ui.get-started-cta,
-.ideax-button._3d-ui._64px.pricing-cta {
+.ivio-button._3d-ui,
+.ivio-button._3d-ui._64px,
+.ivio-button._3d-ui.orange,
+.ivio-button._3d-ui.get-started-cta,
+.ivio-button._3d-ui._64px.pricing-cta {
   background-color: var(--color-ecto-green);
   border: 2px solid var(--color-ecto-green);
   border-bottom: 5px solid var(--color-ecto-press);
@@ -450,22 +450,22 @@ body, button, input, select, textarea,
   margin-bottom: 0;
   color: var(--color-paper);
 }
-.ideax-button._3d-ui:hover,
-.ideax-button._3d-ui.orange:hover { background-color: #61d904; border-color: #61d904; border-bottom-color: var(--color-ecto-press); }
-.ideax-button._3d-ui:active,
-.ideax-button._3d-ui.orange:active {
+.ivio-button._3d-ui:hover,
+.ivio-button._3d-ui.orange:hover { background-color: #61d904; border-color: #61d904; border-bottom-color: var(--color-ecto-press); }
+.ivio-button._3d-ui:active,
+.ivio-button._3d-ui.orange:active {
   background-color: var(--color-ecto-press);
   border-color: var(--color-ecto-press);
   border-bottom-width: 2px;
   transform: translateY(3px);
 }
-.ideax-button._3d-ui._64px.white {
+.ivio-button._3d-ui._64px.white {
   background-color: var(--color-paper);
   border-color: var(--color-lingot-lime);
   border-bottom-color: var(--color-lingot-lime);
   color: var(--color-ecto-green);
 }
-.ideax-button, .ideax-button:link, .ideax-button:visited { color: var(--color-paper); }
+.ivio-button, .ivio-button:link, .ivio-button:visited { color: var(--color-paper); }
 
 /* ---------------------------------------------------------------------------
    15. Result screen — headline, marker highlight, caret, pricing text
@@ -540,9 +540,9 @@ body, button, input, select, textarea,
 :root { --color-ecto-ink: #3a8500; }  /* 4.6:1 on white */
 
 /* labels sitting on a green fill */
-.ideax-button, .ideax-button:link, .ideax-button:visited,
-.ideax-button._3d-ui, .ideax-button._3d-ui._64px, .ideax-button._3d-ui.orange,
-.ideax-button._3d-ui.get-started-cta, .ideax-button._3d-ui._64px.pricing-cta,
+.ivio-button, .ivio-button:link, .ivio-button:visited,
+.ivio-button._3d-ui, .ivio-button._3d-ui._64px, .ivio-button._3d-ui.orange,
+.ivio-button._3d-ui.get-started-cta, .ivio-button._3d-ui._64px.pricing-cta,
 .quiz_button, .quiz_button_text, .button-text-pricing, .ck-continue,
 .options-bottom-button-purple .quiz-answer-hero,
 .price-tag, .price-tag-container, .tag-price-content, .discount-in-button,
@@ -554,7 +554,7 @@ body, button, input, select, textarea,
 .geist-14px.pricing-card-details { color: var(--color-midnight); }
 
 /* ghost buttons keep the green, but the darker ink version */
-.ideax-button.white, .ideax-button._3d-ui._64px.white, .quiz_button.secondary { color: var(--color-ecto-ink); }
+.ivio-button.white, .ivio-button._3d-ui._64px.white, .quiz_button.secondary { color: var(--color-ecto-ink); }
 
 /* green used as text anywhere on a light surface */
 .geist-h1.purple, .geist-36px.purple-text, .geist-14px.purple, .geist-18-px.center.purple,
@@ -614,9 +614,9 @@ body, button, input, select, textarea,
 .quiz-h1 .claude-orange, .claude-orange { color: var(--color-ecto-display); }
 
 /* anything sitting on a green fill is midnight, whatever class it carries */
-.ideax-button *, .quiz_button *, .pricing-cta *, .ck-continue *,
+.ivio-button *, .quiz_button *, .pricing-cta *, .ck-continue *,
 .options-bottom-button-purple * { color: var(--color-midnight) !important; }
-.ideax-button.white *, .ideax-button._3d-ui._64px.white *, .quiz_button.secondary * { color: var(--color-ecto-ink) !important; }
+.ivio-button.white *, .ivio-button._3d-ui._64px.white *, .quiz_button.secondary * { color: var(--color-ecto-ink) !important; }
 
 .text-span-20 { color: var(--color-ecto-ink); }
 
@@ -658,8 +658,8 @@ body, button, input, select, textarea,
    single-colour badges, so a hue rotation lands them on the green without
    needing a redrawn file. (Photographs and product logos are left alone.)
    ------------------------------------------------------------------------ */
-img[src$="teal-arrow.webp"],
-img[src$="Guarantee.webp"] { filter: hue-rotate(-92deg) saturate(1.6); }
+img[src$="teal-arrow.webp"] { filter: hue-rotate(-92deg) saturate(1.6); }
+/* the guarantee seal is a green asset now, so it needs no correction */
 
 /* ---------------------------------------------------------------------------
    24. Pricing — quiet rows

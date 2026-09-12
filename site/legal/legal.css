@@ -1,0 +1,78 @@
+/* Legal pages — self-contained. Same design system as variant B: white ground,
+   one 12px radius, borders instead of shadows, Nunito for text and heavy Inter
+   for headings. Deliberately not sharing styles.css: these pages have none of
+   the funnel's markup and should not inherit 2,600 lines of it. */
+:root {
+  --green: #58cc02;
+  --green-ink: #367b00;
+  --navy: #042c60;
+  --graphite: #3c3c3c;
+  --charcoal: #4b4b4b;
+  --ash: #747474;
+  --hairline: #e5e5e5;
+  --wash: #f0ffe2;
+  --paper: #fff;
+  --sans: 'Nunito', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --display: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--charcoal);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.65;
+  letter-spacing: .012em;
+  -webkit-font-smoothing: antialiased;
+}
+.top {
+  position: sticky; top: 0; z-index: 5;
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 20px;
+  background: var(--paper);
+  border-bottom: 2px solid var(--hairline);
+}
+.top img { width: 32px; height: 32px; display: block; }
+.top .name { font-family: var(--display); font-weight: 800; letter-spacing: -.02em; color: var(--navy); font-size: 17px; }
+.top .back { margin-left: auto; color: var(--green-ink); font-weight: 800; text-decoration: none; border-bottom: 2px solid var(--green); font-size: 14px; }
+.wrap { max-width: 760px; margin: 0 auto; padding: 40px 20px 88px; }
+h1 { font-family: var(--display); font-weight: 800; letter-spacing: -.02em; line-height: 1.15; color: var(--navy); font-size: 38px; margin: 0 0 8px; }
+.updated { color: var(--ash); font-size: 14px; margin: 0 0 28px; }
+h2 {
+  font-family: var(--display); font-weight: 800; letter-spacing: -.015em;
+  color: var(--navy); font-size: 21px; line-height: 1.3;
+  margin: 40px 0 10px; scroll-margin-top: 76px;
+}
+h3 { font-family: var(--sans); font-weight: 800; color: var(--navy); font-size: 16px; margin: 22px 0 6px; }
+p, li { margin: 0 0 12px; }
+ul, ol { padding-left: 22px; margin: 0 0 12px; }
+li { margin-bottom: 6px; }
+a { color: var(--green-ink); }
+strong { color: var(--graphite); }
+.notice {
+  border: 2px solid var(--green);
+  border-bottom-width: 4px;
+  border-radius: 12px;
+  background: var(--wash);
+  padding: 16px 18px;
+  margin: 0 0 32px;
+  color: var(--graphite);
+}
+.notice b { display: block; font-weight: 800; color: var(--green-ink); margin-bottom: 4px; }
+.toc { border: 2px solid var(--hairline); border-bottom-width: 4px; border-radius: 12px; padding: 16px 18px; margin: 0 0 32px; }
+.toc b { display: block; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+.toc ol { margin: 0; }
+.toc a { text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+/* wide tables scroll inside their own box rather than squeezing the columns
+   down to one word per line on a phone */
+.tablewrap { overflow-x: auto; margin: 12px 0 18px; border: 2px solid var(--hairline); border-radius: 12px; }
+table { width: 100%; min-width: 560px; border-collapse: collapse; font-size: 14px; }
+.tablewrap td:last-child, .tablewrap th:last-child { padding-right: 16px; }
+.tablewrap tr:last-child td { border-bottom: 0; }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 2px solid var(--hairline); vertical-align: top; }
+th { font-weight: 800; color: var(--navy); white-space: nowrap; }
+.foot { border-top: 2px solid var(--hairline); margin-top: 48px; padding-top: 20px; color: var(--ash); font-size: 14px; }
+.foot a { font-weight: 700; }
+@media (max-width: 600px) { h1 { font-size: 30px; } .wrap { padding: 28px 18px 72px; } }

@@ -1,4 +1,4 @@
-# Idea X — quiz funnel prototype
+# tryivio.com — quiz funnel prototype
 
 A working static prototype of a 4-step quiz funnel: hero → 19 quiz slides in 4 sections → "analyzing" loader → paywall. Built as a CRO study of how subscription quiz funnels are structured.
 
@@ -35,19 +35,20 @@ Open http://localhost:8765 for A and http://localhost:8765/b/ for B. Append `?re
 
 | File | What it is |
 |---|---|
-| `index.html` | All four screens. Layout structure was studied from an existing subscription funnel; all brand names, logos, third-party rating badges and customer reviews have been removed and replaced with Idea X placeholders. |
+| `index.html` | All four screens. Layout structure was studied from an existing subscription funnel; all brand names, logos, third-party rating badges and customer reviews have been removed and replaced with tryivio.com placeholders. |
 | `styles.css` | The rules these screens use, plus an override block at the bottom that replaces the original Webflow JS interactions. |
 | `app.js` | Flow logic: screen routing, quiz state in `sessionStorage` (`q-*` keys), progress bars, answer mirroring (`data-show-if-key/value`), loader animation, 10-minute countdown, plan tabs, checkout modal. ~300 lines, commented. |
-| `assets/` | Generic imagery (emoji icons, illustrations, chart, avatars) and the Idea X placeholder logo. |
+| `assets/` | Generic imagery (emoji icons, illustrations, chart, avatars) and the tryivio.com placeholder logo. |
 | `b/index.html` | Variant B. Generated — do not edit by hand. |
 | `b/theme.css` | Variant B's entire design layer. Loads after `styles.css` and repaints it. |
 
 ## Before this could become a real funnel
 
-- Replace every `Placeholder review` block with real, attributable testimonials
-- Replace `Join [N]+ learners` with a real figure
+- **Replace the testimonials.** The seven reviews and the `14,000+ learners` figure are written for layout and are not real. They must be replaced with attributable testimonials and a true figure before this is presented as a real product. The avatars are photos inherited from the studied funnel and need replacing too.
+- **Fill the bracketed fields.** `[LEGAL ENTITY NAME]`, `[REGISTERED ADDRESS]`, `[COMPANY NUMBER]`, `[GOVERNING LAW]`, `[JURISDICTION]`, `[SUPPORT EMAIL]` and the retention periods appear in the footer and throughout `legal/`.
+- **Get the policy pages reviewed by a lawyer.** `legal/` covers the right ground but the wording has not been through counsel.
 - Wire a real checkout; the guarantee copy needs real terms behind it
-- Replace `support@ideax.example` with a real address
+- Replace `support@ivio.example` with a real address
 - Remove the prototype banner and the `noindex` tag
 
 The prototype banner is hidden on localhost so it stays out of the way while you are judging the design, and shown everywhere else — including the deployed Pages copy, which is publicly reachable and still carries placeholder reviews and ratings. Add `?proto` to any local URL to force it back on.
@@ -74,3 +75,11 @@ The four `bullet-0*-green.webp` files are originals generated for this variant. 
 ## Shared behaviour (both variants)
 
 The mobile sticky "Get started" bar exists to send you to the plans, so it stands down while the plan cards are in view and returns below them. It watches the card list, not the whole pricing section — the section starts a screenful earlier at the heading. Lives in `app.js` + one rule in `styles.css`, so A and B behave identically and the test stays clean.
+
+## Legal pages
+
+`legal/terms-of-use.html`, `legal/privacy-policy.html` and `legal/cookie-policy.html`, with their own self-contained `legal.css` — they share the design system but none of the funnel's 2,600 lines of markup-specific CSS.
+
+The section structure follows what a subscription learning funnel needs to cover (auto-renewal and cancellation, the 14-day withdrawal right, GDPR lawful bases and data-subject rights, the four cookie categories). **The wording is original and has not been reviewed by a lawyer**, and every company-specific fact is left as a bracketed placeholder rather than invented. Each page carries a visible draft notice saying so.
+
+Both variants link to the same pages; the build script rewrites `href="legal/` to `../legal/` for B.

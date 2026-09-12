@@ -51,6 +51,7 @@ def build(html: str) -> str:
     # every relative reference now sits one directory deeper
     html = html.replace('src="assets/', 'src="../assets/')
     html = html.replace('href="assets/', 'href="../assets/')
+    html = html.replace('href="legal/', 'href="../legal/')
     html = html.replace('src="app.js"', 'src="../app.js"')
 
     # swap the typefaces, then layer the theme over the base stylesheet
@@ -63,8 +64,8 @@ def build(html: str) -> str:
     )
 
     html = html.replace(
-        "<title>Idea X — quiz funnel prototype</title>",
-        "<title>Idea X — quiz funnel (variant B)</title>",
+        "<title>tryivio.com — quiz funnel prototype</title>",
+        "<title>tryivio.com — quiz funnel (variant B)</title>",
         1,
     )
     # lets analytics split A from B without a separate property
@@ -81,7 +82,7 @@ def main() -> int:
         if needle not in out:
             print(f"build failed: {needle!r} missing from output", file=sys.stderr)
             return 1
-    if 'href="styles.css"' in out or 'src="assets/' in out:
+    if 'href="styles.css"' in out or 'src="assets/' in out or 'href="legal/' in out:
         print("build failed: an un-rewritten relative path survived", file=sys.stderr)
         return 1
     for old, new in ASSET_SWAPS.items():
