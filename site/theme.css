@@ -818,30 +818,11 @@ a.w-tab-link.w--current .pricing-radio-card.version-b.full._92height.teal-blur {
 
 /* ---------------------------------------------------------------------------
    25. Reviews — emphasis and the rating strip
-   The reference funnel puts a third-party rating badge above this group. That
-   badge is a real company's trademark asserting a verified score, so it stays
-   out until there is a real profile behind it; this is the slot it drops into.
+   Just the emphasis treatment on each review's opening claim.
    ------------------------------------------------------------------------ */
 .review-v2 .geist-16px strong { color: var(--color-eel-dark-blue); font-weight: 800; }
 
-.rating-strip {
-  display: flex; flex-direction: column; align-items: center; gap: 4px;
-  margin: 0 auto 20px;
-  padding: 14px 20px;
-  max-width: 420px;
-  background: var(--color-paper);
-  border: 2px solid var(--color-hairline);
-  border-bottom-width: 4px;
-  border-radius: var(--radius);
-  text-align: center;
-}
-.rating-stars { color: #ffc800; font-size: 20px; letter-spacing: 3px; line-height: 1; }
-.rating-text { font-family: var(--font-din-round); font-size: 15px; color: var(--color-charcoal); }
-.rating-text b { color: var(--color-eel-dark-blue); font-weight: 800; }
-.rating-note {
-  font-family: var(--font-din-round); font-size: 12px; font-weight: 700;
-  color: var(--color-ash); text-transform: uppercase; letter-spacing: var(--tracking-ui);
-}
+
 
 /* ---------------------------------------------------------------------------
    26. Sample-content note
