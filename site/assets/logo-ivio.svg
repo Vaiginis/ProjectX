@@ -1,5 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" role="img" aria-label="tryivio.com">
-  <rect width="40" height="40" rx="10" fill="#1D1D1F"/>
-  <circle cx="20" cy="12.6" r="2.7" fill="#FFFFFF"/>
-  <path d="M20 19.4 V28.6" stroke="#FFFFFF" stroke-width="4.4" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 194 80" width="194" height="80" role="img" aria-label="ivio">
+  <!-- Geometric construction. One grid governs everything:
+       x-height 56 · stroke 16 · dot diameter 16 · dot gap 8 · baseline y=80.
+       The o is a true circle (stroke 16 on r20 gives outer r28, counter r12);
+       the v is one polygon of constant 16 horizontal thickness, 64 wide, which
+       puts its inner apex at y=52 and gives the counter a 50% depth; the i
+       stems are the same 16. Every weight in the word therefore matches. -->
+  <g fill="#14161A">
+    <!-- i -->
+    <circle cx="8" cy="8" r="8"/>
+    <rect x="0" y="24" width="16" height="56"/>
+    <!-- v : outer (30,24)->(62,80) and (94,24)->(62,80); inner apex (62,52) -->
+    <path d="M30 24 H46 L62 52 L78 24 H94 L66 73 Q62 80 58 73 Z"/>
+    <!-- i -->
+    <circle cx="108" cy="8" r="8"/>
+    <rect x="100" y="24" width="16" height="56"/>
+    <!-- o : stroke 16 on radius 20 -> outer 28, counter 12 -->
+    <circle cx="166" cy="52" r="20" fill="none" stroke="#14161A" stroke-width="16"/>
+  </g>
 </svg>
