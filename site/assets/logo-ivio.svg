@@ -1,20 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 194 80" width="194" height="80" role="img" aria-label="ivio">
-  <!-- Geometric construction. One grid governs everything:
-       x-height 56 · stroke 16 · dot diameter 16 · dot gap 8 · baseline y=80.
-       The o is a true circle (stroke 16 on r20 gives outer r28, counter r12);
-       the v is one polygon of constant 16 horizontal thickness, 64 wide, which
-       puts its inner apex at y=52 and gives the counter a 50% depth; the i
-       stems are the same 16. Every weight in the word therefore matches. -->
-  <g fill="#14161A">
-    <!-- i -->
-    <circle cx="8" cy="8" r="8"/>
-    <rect x="0" y="24" width="16" height="56"/>
-    <!-- v : outer (30,24)->(62,80) and (94,24)->(62,80); inner apex (62,52) -->
-    <path d="M30 24 H46 L62 52 L78 24 H94 L66 73 Q62 80 58 73 Z"/>
-    <!-- i -->
-    <circle cx="108" cy="8" r="8"/>
-    <rect x="100" y="24" width="16" height="56"/>
-    <!-- o : stroke 16 on radius 20 -> outer 28, counter 12 -->
-    <circle cx="166" cy="52" r="20" fill="none" stroke="#14161A" stroke-width="16"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 80" width="192" height="80" role="img" aria-label="ivio">
+  <!-- One grid throughout: stroke 16 · x-height 54 (y 26→80) · dot radius 9 ·
+       dot-to-stem gap 8 · baseline y=80. Stems are pills (rx = half the stroke),
+       the o is a true circle drawn as a 16 stroke on radius 19 (outer 27,
+       counter 11), and the v is one polygon of constant 16 horizontal
+       thickness, 64 wide, so its inner apex lands at half the x-height. -->
+  <g fill="#042C60">
+    <rect x="0" y="26" width="16" height="54" rx="8"/>
+    <!-- v : outer (30,26)->(62,80) and (94,26)->(62,80); inner apex (62,53) -->
+    <path d="M30 26 H46 L62 53 L78 26 H94 L69 72 Q62 82 55 72 Z"/>
+    <rect x="108" y="26" width="16" height="54" rx="8"/>
+    <circle cx="165" cy="53" r="19" fill="none" stroke="#042C60" stroke-width="16"/>
+  </g>
+  <g fill="#58CC02">
+    <circle cx="8" cy="9" r="9"/>
+    <circle cx="116" cy="9" r="9"/>
   </g>
 </svg>

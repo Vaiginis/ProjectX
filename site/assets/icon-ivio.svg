@@ -1,9 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="ivio">
-  <!-- Monogram: a downward triangle with a semicircular bite taken out of its
-       top edge, so the void reads as the counter of a v. The bite is cut into
-       the outline itself rather than subtracted as a separate subpath — an
-       evenodd subtraction would also fill the half of the circle sitting above
-       the edge. Apex rounded to match the wordmark's v. -->
-  <path fill="#14161A"
-        d="M8 26 H27 A23 23 0 0 0 73 26 H92 L58 82 Q50 94 42 82 Z"/>
+  <!-- The i from the wordmark, on a navy tile. Bare on white it reads as
+       punctuation at favicon size; the tile gives it a silhouette that still
+       registers at 16px, and keeps the green dot as the recognisable signal. -->
+  <rect width="100" height="100" rx="24" fill="#042C60"/>
+  <circle cx="50" cy="29" r="12" fill="#58CC02"/>
+  <rect x="39" y="48" width="22" height="32" rx="11" fill="#FFFFFF"/>
 </svg>
