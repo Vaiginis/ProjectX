@@ -1,4 +1,4 @@
-/* Idea X quiz-funnel clone — flow logic.
+/* tryivio.com quiz-funnel clone — flow logic.
    One page, four screens: start → quiz → analyzing → result.
    Answers live in sessionStorage under "q-*" keys, exactly like the original,
    so the summary slide and the paywall can mirror them back.
@@ -261,6 +261,25 @@
       target && target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }));
 
+    // The sticky "Get started" bar (mobile only) exists to send you to the plans.
+    // Once the plan cards themselves are on screen it has nothing left to do and
+    // sits on top of them, so it stands down while they are in view and comes
+    // back below them. Watch the card list, not the whole pricing section — the
+    // section starts a screenful earlier, at the heading.
+    // All three currency blocks are observed because only one is ever displayed
+    // and which one that is gets decided later, in enter(); a hidden block never
+    // reports as intersecting, so the visible one is the only one that counts.
+    const stickyBar = $('.sticky-button', root);
+    const planLists = $$('.section-pricing .w-tab-menu', root);
+    if (stickyBar && planLists.length && 'IntersectionObserver' in window) {
+      const onScreen = new Set();
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => e.isIntersecting ? onScreen.add(e.target) : onScreen.delete(e.target));
+        stickyBar.classList.toggle('stand-down', onScreen.size > 0);
+      }, { threshold: 0, rootMargin: '0px 0px 120px 0px' }); // clear the 88px bar before the first card arrives
+      planLists.forEach(el => io.observe(el));
+    }
+
     // plan CTA → checkout modal
     $$('.pricing-cta', root).forEach(a => a.addEventListener('click', e => {
       e.preventDefault();
@@ -271,14 +290,17 @@
       const cur = $('.tag-price-content .geist-14px', card);
       const sym = cur ? cur.textContent.trim() : '€';
       const perDay = `${sym}${text('.geist-pricing-price')}.${$$('.tag-price-content .geist-14px', card)[1]?.textContent.trim() || ''}/Day`;
+      // "12 Weeks" -> "12-week Plan"; "1 Week Trial" -> "1-week Trial"
+      const planName = text('.plan-title-tag .geist-18-px');
+      const weeks = (planName.match(/(\d+)\s*weeks?/i) || [])[1];
       openCheckout({
-        title: text('.plan-title-tag .geist-18-px').replace(/s$/i, '').toLowerCase().replace(' ', '-'),
+        title: weeks ? `${weeks}-week ${/trial/i.test(planName) ? 'Trial' : 'Plan'}` : planName,
         badge: text('.uui-badge-small-success-2') || '',
         old: prices[0] || '', new: prices[1] || '', perDay,
       });
     }));
 
-    $$('[data-legal]', root).forEach(a => a.addEventListener('click', e => e.preventDefault()));
+    // legal links now point at real pages, so they are left alone to navigate
 
     function enter() {
       currency();
