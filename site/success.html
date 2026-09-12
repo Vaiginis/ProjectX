@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>You're in — tryivio.com</title>
+<meta name="robots" content="noindex, nofollow"/>
+<link rel="icon" href="assets/icon-ivio.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&family=Inter:wght@800&display=swap">
+<link rel="stylesheet" href="legal/legal.css">
+<style>
+  .wrap { max-width: 560px; text-align: center; padding-top: 56px; }
+  .tick {
+    width: 88px; height: 88px; margin: 0 auto 28px;
+    border-radius: 999px; background: #58cc02;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .tick svg { width: 44px; height: 44px; }
+  h1 { font-size: 40px; margin-bottom: 10px; }
+  .lede { font-size: 17px; color: var(--charcoal); margin: 0 auto 36px; max-width: 440px; }
+  .steps {
+    text-align: left; border: 2px solid var(--hairline); border-bottom-width: 4px;
+    border-radius: 12px; padding: 22px 24px; margin: 0 0 28px;
+  }
+  .steps h2 { font-size: 17px; margin: 0 0 14px; }
+  .steps ol { margin: 0; padding-left: 20px; }
+  .steps li { margin-bottom: 10px; }
+  .steps li:last-child { margin-bottom: 0; }
+  .btn {
+    display: inline-block; background: #58cc02; color: #000437;
+    border: 2px solid #58cc02; border-bottom: 5px solid #46a302; border-radius: 12px;
+    padding: 15px 30px; font-weight: 800; text-decoration: none;
+    font-size: 15px; letter-spacing: .053em; text-transform: uppercase;
+  }
+  .btn:active { background: #46a302; border-bottom-width: 2px; transform: translateY(3px); }
+  .help { margin-top: 30px; font-size: 14px; color: var(--ash); }
+  @media (max-width: 600px) { h1 { font-size: 31px; } .wrap { padding-top: 36px; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <img src="assets/icon-ivio.svg" alt="tryivio.com">
+  <span class="name">tryivio.com</span>
+  <a class="back" href="index.html">Back to site</a>
+</header>
+
+<main class="wrap">
+  <div class="tick" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 12.5 L9.5 18 L20 6.5" stroke="#fff" stroke-width="3.2"
+            stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <h1>You're in</h1>
+  <p class="lede">Your payment went through and your subscription is active. Stripe has emailed a receipt to the address you used at checkout.</p>
+
+  <div class="steps">
+    <h2>What happens next</h2>
+    <ol>
+      <li>Check your inbox for the receipt from Stripe. If it hasn't arrived in a few minutes, look in spam.</li>
+      <li>[CONFIRM: what the customer receives to get access, and how long it takes.]</li>
+      <li>You can cancel any time from the link in your receipt, or by emailing us. Cancelling stops the next renewal and you keep access until the period you've paid for ends.</li>
+    </ol>
+  </div>
+
+  <a class="btn" href="index.html">Get started</a>
+
+  <p class="help">Something not right? Email <a href="mailto:help@tryivio.com">help@tryivio.com</a> and we'll sort it out.<br>
+  Your subscription terms are in the <a href="legal/terms-of-use.html">Terms of Use</a>.</p>
+</main>
+</body>
+</html>
