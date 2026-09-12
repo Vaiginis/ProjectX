@@ -4,24 +4,11 @@ A working static prototype of a 4-step quiz funnel: hero → 19 quiz slides in 4
 
 **This is a prototype, not a product.** No payment is processed. Reviews, ratings, learner counts and the guarantee are placeholder copy for layout only — none of them are real claims. The page is marked `noindex, nofollow`.
 
-## Two variants, for A/B testing
+## Deployment
 
-| | URL | What it is |
-|---|---|---|
-| **A** | `/` | The original build. Purple/teal, Geist, soft shadows, mixed corner radii. |
-| **B** | `/b/` | Same funnel, "green playground" skin: one saturated green, 12px corners everywhere, depth from solid borders instead of shadows, Nunito + heavy Inter display. |
+Published by GitHub Actions (`.github/workflows/pages.yml`) from `./site` to GitHub Pages, served at **tryivio.com**. `site/CNAME` is what tells Pages the custom domain; deleting it reverts the site to the `github.io` address.
 
-Both variants share `app.js`, `styles.css` and `assets/`, and B's markup is **generated** from A's:
-
-```bash
-python3 tools/build-variant-b.py
-```
-
-So the questions, copy, order, timings and storage keys are identical by construction — the two pages cannot drift apart. The difference between them is `site/b/theme.css` plus one declared markup swap: the four bullet illustrations (`ASSET_SWAPS` in the build script). Everything the funnel *asks* and *does* is identical; only how it looks differs. That is what makes the test readable.
-
-Re-run the build after editing `site/index.html`, or B will still be serving the old copy.
-
-To split traffic, point ads at the two URLs directly rather than adding a client-side redirect — a redirect costs latency on the exact step you are measuring.
+Variant A and the A/B build script were retired once variant B was chosen — B is now simply the site. `theme.css` still loads after `styles.css` and carries the whole green design layer; the two were left separate rather than merged so the design decisions stay legible in one file.
 
 ## Run it locally
 
@@ -29,7 +16,7 @@ To split traffic, point ads at the two URLs directly rather than adding a client
 python3 -m http.server 8765
 ```
 
-Open http://localhost:8765 for A and http://localhost:8765/b/ for B. Append `?reset` to start over (answers persist per tab).
+Open http://localhost:8765. Append `?reset` to start over (answers persist per tab).
 
 ## What's inside
 
@@ -39,8 +26,9 @@ Open http://localhost:8765 for A and http://localhost:8765/b/ for B. Append `?re
 | `styles.css` | The rules these screens use, plus an override block at the bottom that replaces the original Webflow JS interactions. |
 | `app.js` | Flow logic: screen routing, quiz state in `sessionStorage` (`q-*` keys), progress bars, answer mirroring (`data-show-if-key/value`), loader animation, 10-minute countdown, plan tabs, checkout modal. ~300 lines, commented. |
 | `assets/` | Generic imagery (emoji icons, illustrations, chart, avatars) and the tryivio.com placeholder logo. |
-| `b/index.html` | Variant B. Generated — do not edit by hand. |
-| `b/theme.css` | Variant B's entire design layer. Loads after `styles.css` and repaints it. |
+| `theme.css` | The whole green design layer. Loads after `styles.css` and repaints it. |
+| `legal/` | Terms of Use, Privacy Policy, Cookie Policy, with their own stylesheet. |
+| `CNAME` | The custom domain for GitHub Pages. |
 
 ## Before this could become a real funnel
 
