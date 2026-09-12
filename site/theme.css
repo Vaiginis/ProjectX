@@ -842,3 +842,21 @@ a.w-tab-link.w--current .pricing-radio-card.version-b.full._92height.teal-blur {
   font-family: var(--font-din-round); font-size: 12px; font-weight: 700;
   color: var(--color-ash); text-transform: uppercase; letter-spacing: var(--tracking-ui);
 }
+
+/* ---------------------------------------------------------------------------
+   26. Sample-content note
+   Was a fixed black bar across the bottom of every screen. Same sentence, now a
+   quiet line at the top of the footer where it belongs — it stops covering the
+   design without the page losing the disclosure.
+   ------------------------------------------------------------------------ */
+.proto-note {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 18px 20px 0;
+  font-family: var(--font-din-round);
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: var(--tracking-ui);
+  color: var(--color-ash);
+  text-align: center;
+}
