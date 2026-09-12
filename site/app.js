@@ -11,6 +11,14 @@
 
   const CONFIG = { currency: 'eur', analyzingMs: 10170, timerMs: 600000 };
 
+  /* Stripe payment links, keyed by the number of weeks in the plan name.
+     Swap a URL here and the matching plan's CTA follows it. */
+  const STRIPE_LINKS = {
+    '1':  'https://buy.stripe.com/bJefZ976024P7gl4AWgnK01',   // 1 Week Trial
+    '4':  'https://buy.stripe.com/7sY9ALaicaBl449d7sgnK00',   // 4 Weeks
+    '12': 'https://buy.stripe.com/7sYfZ9duodNxgQVffAgnK02',   // 12 Weeks
+  };
+
   if (/[?&]reset\b/.test(location.search)) {
     S.clear();
     history.replaceState(null, '', location.pathname);
@@ -280,24 +288,16 @@
       planLists.forEach(el => io.observe(el));
     }
 
-    // plan CTA → checkout modal
+    // plan CTA → Stripe checkout for the selected plan
     $$('.pricing-cta', root).forEach(a => a.addEventListener('click', e => {
       e.preventDefault();
       const tabs = a.closest('.w-tabs');
       const card = $('.w-tab-link.w--current', tabs);
-      const text = sel => { const el = $(sel, card); return el ? el.textContent.trim() : ''; };
-      const prices = $$('.discount-price-text .geist-14px', card).map(el => el.textContent.trim());
-      const cur = $('.tag-price-content .geist-14px', card);
-      const sym = cur ? cur.textContent.trim() : '€';
-      const perDay = `${sym}${text('.geist-pricing-price')}.${$$('.tag-price-content .geist-14px', card)[1]?.textContent.trim() || ''}/Day`;
-      // "12 Weeks" -> "12-week Plan"; "1 Week Trial" -> "1-week Trial"
-      const planName = text('.plan-title-tag .geist-18-px');
+      const planName = card ? ($('.plan-title-tag .geist-18-px', card) || {}).textContent || '' : '';
       const weeks = (planName.match(/(\d+)\s*weeks?/i) || [])[1];
-      openCheckout({
-        title: weeks ? `${weeks}-week ${/trial/i.test(planName) ? 'Trial' : 'Plan'}` : planName,
-        badge: text('.uui-badge-small-success-2') || '',
-        old: prices[0] || '', new: prices[1] || '', perDay,
-      });
+      const url = STRIPE_LINKS[weeks];
+      if (!url) return;                       // unknown plan: do nothing rather than send them somewhere wrong
+      window.location.href = url;             // same tab — a new one gets blocked on some mobile browsers
     }));
 
     // legal links now point at real pages, so they are left alone to navigate
