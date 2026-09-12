@@ -28,11 +28,26 @@ FONTS_B = (
 BANNER = (
     "<!-- GENERATED FILE — do not edit.\n"
     "     Built from site/index.html by tools/build-variant-b.py.\n"
-    "     Variant B differs from A only in site/b/theme.css. -->\n"
+    "     Variant B differs from A in site/b/theme.css and in the four bullet\n"
+    "     illustrations swapped below. Nothing else. -->\n"
 )
+
+# The only markup difference between the variants. Variant A's four bullet
+# illustrations are drawn in its purple/teal accent (and two of them still carry
+# the original site's name and logo); B ships green originals of the same four
+# ideas. Art is part of the design being tested, so this belongs in B's layer.
+ASSET_SWAPS = {
+    "assets/Image_01.webp": "assets/bullet-01-green.webp",
+    "assets/Image_02.webp": "assets/bullet-02-green.webp",
+    "assets/Image_03.webp": "assets/bullet-03-green.webp",
+    "assets/Image_04.webp": "assets/bullet-04-green.webp",
+}
 
 
 def build(html: str) -> str:
+    for old, new in ASSET_SWAPS.items():
+        html = html.replace(f'src="{old}"', f'src="{new}"')
+
     # every relative reference now sits one directory deeper
     html = html.replace('src="assets/', 'src="../assets/')
     html = html.replace('href="assets/', 'href="../assets/')
@@ -69,6 +84,13 @@ def main() -> int:
     if 'href="styles.css"' in out or 'src="assets/' in out:
         print("build failed: an un-rewritten relative path survived", file=sys.stderr)
         return 1
+    for old, new in ASSET_SWAPS.items():
+        if old.split("/")[-1] in out:
+            print(f"build failed: {old} survived the swap", file=sys.stderr)
+            return 1
+        if not (SRC.parent / new).exists():
+            print(f"build failed: {new} does not exist", file=sys.stderr)
+            return 1
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(out, encoding="utf-8")

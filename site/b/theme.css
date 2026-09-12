@@ -118,13 +118,12 @@ body, button, input, select, textarea,
 .pricing-radio-card,
 .pricing-radio-card.version-b.full._92height.teal-blur,
 .pricing-radio-card.version-b.full._92height.teal-blur.exitoffer,
-.possibility-line,
 .section-pricing,
 .quiz-body-hero,
 .quiz-body-loader { background-image: none; }
 
 .pricing-radio-card { background-color: var(--color-paper); border: 2px solid var(--color-hairline); }
-.possibility-line { background-color: var(--color-ecto-green); }
+/* .possibility-line is the deliberate exception to the no-gradient rule — see §15 */
 
 /* ---------------------------------------------------------------------------
    3. One radius
@@ -296,8 +295,22 @@ body, button, input, select, textarea,
 .circle-progress .ring .ring-fg { stroke: var(--color-ecto-green); }
 .circle-progress .ring .ring-bg { stroke: var(--color-hairline); }
 .q-preference-item.is-done .desc-quiz { color: var(--color-ecto-press) !important; }
-.mini-loader-line1, .mini-loader-line2, .mini-loader-line3, .mini-loader-line4,
-.mini-loader-corner { border-color: var(--color-ecto-green); background-color: var(--color-ecto-green); }
+
+/* No spinners. Variant A runs a four-arc loader per row; this system has no
+   spinning parts. Every line is on screen from the start — empty ring, muted
+   text — and ticks over as the progress ring fills. The ring keeps its 20px box
+   once ticked (variant A positions the tick absolutely at left:0 over that
+   slot), so the text never shifts and nothing lands on top of it. */
+.q-mini-loader {
+  animation: none !important;
+  box-sizing: border-box;
+  flex: 0 0 20px;
+  border: 2px solid var(--color-hairline);
+  border-radius: 999px;
+  transition: border-color .25s ease;
+}
+.q-mini-loader > * { display: none !important; }
+.q-preference-item .desc-quiz { transition: color .25s ease; }
 
 /* ---------------------------------------------------------------------------
    9. Paywall
@@ -348,7 +361,14 @@ body, button, input, select, textarea,
 .ck-plan { border: 2px solid var(--color-hairline); border-bottom-width: 4px; }
 .ck-badge { background: var(--color-eel-light); color: var(--color-ecto-press); }
 .ck-input { border: 2px solid var(--color-hairline); }
-.ck-input:focus { border-color: var(--color-macaw-blue); }
+/* One ring, and it is drawn here rather than left to :focus-visible — text
+   fields do not always match that heuristic, and variant A sets outline:none
+   on this input, so relying on it risks a field with no focus indicator. */
+.ck-input:focus {
+  border-color: var(--color-hairline);
+  outline: 3px solid var(--color-macaw-press);
+  outline-offset: 2px;
+}
 .ck-continue {
   background-color: var(--color-ecto-green);
   border: 2px solid var(--color-ecto-green);
@@ -362,7 +382,11 @@ body, button, input, select, textarea,
 /* ---------------------------------------------------------------------------
    11. Focus — visible, and outline-based since shadows are gone
    ------------------------------------------------------------------------ */
-:focus-visible { outline: 3px solid var(--color-macaw-blue); outline-offset: 2px; }
+/* One ring. A focused field used to get both a blue border and this outline,
+   which read as a double outline. The outline is the indicator; fields keep
+   their resting border. The darker blue clears 3:1 against white, which the
+   lighter macaw blue (2.3:1) does not. */
+:focus-visible { outline: 3px solid var(--color-macaw-press); outline-offset: 2px; }
 
 /* links keep the highlighter-pen treatment */
 .policies-link, .tp-tag-text a {
@@ -470,8 +494,18 @@ body, button, input, select, textarea,
 .pricing-text, .pricing-text.wider, .uui-text-size-small-geist.gray { color: var(--color-ash); }
 .tp-tag-text, .tp-tag-text.center.fixed-v2 { color: var(--color-graphite); }
 
-/* the three-stop gradient bar becomes one flat green track */
-.possibility-line { background-image: none; background-color: var(--color-ecto-green); }
+/* The one deliberate gradient in the system. Everywhere else colour is flat,
+   but this is a score meter: the red-to-green ramp IS the scale, and a flat bar
+   throws that information away. Red and amber appear nowhere else. */
+.possibility-line {
+  background-image: linear-gradient(90deg,
+    #ff4b4b 0%,
+    #ff9600 32%,
+    #ffc800 52%,
+    #9ad414 76%,
+    var(--color-ecto-green) 100%);
+  background-color: transparent;
+}
 .possibility-score-dot, .possibility-tag { border-color: var(--color-ecto-green); }
 .geist-18-px.teal-text { color: var(--color-ecto-green); }
 .best-fit-tag-bigger-teal { background-color: var(--color-macaw-blue); border-color: var(--color-macaw-press); }
@@ -540,3 +574,244 @@ body, button, input, select, textarea,
 .sticky-timer-exit-offer, .sticky-timer-exit-offer.w--current { background-color: #f4fff0; border-bottom-color: var(--color-eel-light); }
 .uui-badge-small-success-2.square-teal { background-color: #e8f7ff; color: var(--color-macaw-press); }
 .uui-badge-small-success-2.square-orange { background-color: var(--color-eel-light); }
+
+/* ---------------------------------------------------------------------------
+   19. Legibility, second pass
+   Ash at #777 lands on 4.48:1 against white — a hair under AA — and the ink
+   green needs to clear 4.5 on the pale washes too, not just on paper.
+   ------------------------------------------------------------------------ */
+:root {
+  --color-ash: #747474;      /* 4.66:1 on white */
+  --color-ecto-ink: #367b00; /* 5.3:1 on white, 4.7:1 on the lime wash */
+}
+
+/* the one rose tag left in the system — pink is not in this palette */
+.special-offer-rose { background-color: var(--color-macaw-blue); border-color: var(--color-macaw-press); }
+.tag-text, .best-fit-tag-text-bigger, .best-fit-tag-text-bigger.medium { color: var(--color-midnight); }
+
+/* dark chip: midnight ground, lime label */
+.uui-badge-small-success-2.dark.square-teal { background-color: var(--color-midnight); }
+.uui-badge-small-success-2.dark.square-teal .geist-16px.green-text.medium-teal,
+.uui-badge-small-success-2.dark .geist-16px.green-text.medium-teal { color: var(--color-lingot-lime) !important; }
+
+/* ---------------------------------------------------------------------------
+   20. Legibility, third pass — analyzing list, legal links, checkout modal
+   ------------------------------------------------------------------------ */
+.desc-quiz, .desc-quiz.primary, .desc-quiz.primary.left, .desc-quiz.teal { color: var(--color-charcoal); }
+.quiz-h3.desc-quiz { color: var(--color-eel-dark-blue); }
+.policies-link { color: var(--color-ash); }
+.ck-close, .ck-prices, .ck-note { color: var(--color-ash); }
+.ck-badge { color: var(--color-ecto-ink); }
+
+/* ---------------------------------------------------------------------------
+   21. Legibility, final pass
+   Three greens, three jobs: the fill green is too light to be read on white, so
+   display text steps down one notch and body text steps down two. Same hue
+   throughout, so the page still reads as one colour.
+   ------------------------------------------------------------------------ */
+:root { --color-ecto-display: #4aa802; }  /* 3.0:1 — AA for text 24px+ */
+
+.quiz-h1 .claude-orange, .claude-orange { color: var(--color-ecto-display); }
+
+/* anything sitting on a green fill is midnight, whatever class it carries */
+.ideax-button *, .quiz_button *, .pricing-cta *, .ck-continue *,
+.options-bottom-button-purple * { color: var(--color-midnight) !important; }
+.ideax-button.white *, .ideax-button._3d-ui._64px.white *, .quiz_button.secondary * { color: var(--color-ecto-ink) !important; }
+
+.text-span-20 { color: var(--color-ecto-ink); }
+
+/* the analyzing list carries a Webflow inline colour, so this one needs force.
+   Pending lines read as inactive (ash, still AA at 4.7:1), done lines go green. */
+.q-preference-item .desc-quiz { color: var(--color-ash) !important; }
+.q-preference-item.is-done .desc-quiz { color: var(--color-ecto-ink) !important; }
+
+/* ---------------------------------------------------------------------------
+   22. One radius, no stragglers
+   Variant A ships 15 different corner values. Everything that reads as a card,
+   tag, chip or container comes to 12px; only true circles and the checkbox keep
+   their own shape.
+   ------------------------------------------------------------------------ */
+.back_button, .option_answear_tag, .special-offer-rose, .ck-close,
+.answers-summary-container, .q-preferences-block,
+.pricing1, .pricing2, .pricing3, .pricing-p1, .pricing-p2, .pricing-p3,
+.answear_icon_bg_24px, .div-block-166, .timer-exit, .ck-badge,
+.highlight-green, .highlight-green.course.js,
+.hero-summary-container, .guarantee-pricing, .vs-block-white, .readiness-container,
+.image-149, .possibility-tag, .bullets-container, .div-block-252,
+.sticky-button, .modal-container, .modal-container.exitui,
+.answer-summary-container, .q-preference-item { border-radius: var(--radius) !important; }
+
+/* the last element still asking for variant A's typeface */
+.quiz_input, .quiz_input.w-input, .form_other_input, input, textarea, select {
+  font-family: var(--font-din-round);
+  letter-spacing: var(--tracking-ui);
+}
+.quiz_input, .form_other_input { border: 2px solid var(--color-hairline); border-radius: var(--radius); }
+.quiz_input:focus, .form_other_input:focus {
+  border-color: var(--color-hairline);
+  outline: 3px solid var(--color-macaw-press);
+  outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------------------------
+   23. Two raster assets carry variant A's teal baked in. They are flat
+   single-colour badges, so a hue rotation lands them on the green without
+   needing a redrawn file. (Photographs and product logos are left alone.)
+   ------------------------------------------------------------------------ */
+img[src$="teal-arrow.webp"],
+img[src$="Guarantee.webp"] { filter: hue-rotate(-92deg) saturate(1.6); }
+
+/* ---------------------------------------------------------------------------
+   24. Pricing — quiet rows
+   Same information as variant A, four fewer containers. A row carried three
+   nested rounded boxes, a left-pointing tag arrow and a saturated green slab,
+   which meant two greens competing for different jobs: "this is the price" and
+   "this is the one you picked". Here the price is plain dark type and green is
+   reserved for selection alone, so the chosen row is the only coloured thing
+   on screen. Nothing is removed — plan name, saving, old price, new price,
+   per-day price and the popular flag all stay, just unboxed.
+   ------------------------------------------------------------------------ */
+
+/* the arrow and the slab behind the per-day price */
+.price-tag-arrow { display: none !important; }
+.price-tag, .price-tag-container, .tag-price-content {
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  padding: 0 !important;
+  color: var(--color-eel-dark-blue) !important;
+}
+.tag-price-content { gap: 1px; }
+
+/* per-day price: one calm number instead of a billboard */
+.geist-pricing-price, .geist-pricing-price.default, .geist-pricing-price.default._34-mobile {
+  font-family: var(--font-din-round);
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -.01em;
+  color: var(--color-eel-dark-blue) !important;
+}
+.price-tag .geist-14px.semibold { color: var(--color-eel-dark-blue) !important; font-weight: 800; }
+.geist-14px.pricing-card-details { color: var(--color-ash) !important; font-weight: 700; }
+
+/* plan name: no pill around it */
+.plan-title-tag {
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  padding: 0 !important;
+  gap: 10px;
+}
+.geist-18-px.no-braking, .geist-18-px.pricing-card-highlight, .geist-18-px.pricing-card-highlight.no-braking {
+  color: var(--color-eel-dark-blue) !important;
+  font-weight: 800;
+}
+
+/* saving: one line of green text, not a chip */
+.uui-badge-small-success-2,
+.uui-badge-small-success-2.square-teal,
+.uui-badge-small-success-2.dark,
+.uui-badge-small-success-2.dark.square-teal {
+  background-color: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+}
+.uui-badge-small-success-2 .geist-16px.green-text.medium-teal,
+.uui-badge-small-success-2.dark .geist-16px.green-text.medium-teal,
+.uui-badge-small-success-2.dark.square-teal .geist-16px.green-text.medium-teal {
+  color: var(--color-ecto-ink) !important;
+  font-weight: 800;
+}
+
+/* old price: an ash strikethrough, not a red rule drawn over the top */
+.red-line { display: none !important; }
+.crossed-price .geist-14px, .crossed-price .geist-14px.quartenary {
+  text-decoration: line-through;
+  text-decoration-thickness: 1.5px;
+  color: var(--color-ash) !important;
+}
+.discount-price-text { gap: 8px; align-items: baseline; }
+.discount-price-text > .geist-14px.quartenary { color: var(--color-charcoal) !important; font-weight: 700; }
+
+/* "Most popular": a quiet marker, not a pink balloon */
+.special-offer-rose {
+  background-color: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  gap: 4px;
+}
+.special-offer-rose .tag-text {
+  color: var(--color-ecto-ink) !important;
+  font-family: var(--font-din-round);
+  font-weight: 800;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-ui);
+}
+.special-offer-rose svg path { fill: var(--color-ecto-ink) !important; stroke: none !important; }
+
+/* the row itself is the only place colour happens */
+.pricing-radio-card.white, .pricing-radio-card.version-b.full._92height.teal-blur {
+  background-color: var(--color-paper) !important;
+  border: 2px solid var(--color-hairline) !important;
+  border-bottom-width: 4px !important;
+}
+.w-tab-link.w--current .pricing-radio-card {
+  background-color: var(--color-eel-light) !important;
+  border: 2px solid var(--color-ecto-green) !important;
+  border-bottom: 4px solid var(--color-ecto-press) !important;
+}
+.radio-default, .radio-default.white { border: 2px solid var(--color-hairline) !important; background-color: var(--color-paper); }
+
+/* Specificity catch-up: variant A's selected card is matched by a five-class
+   selector, so the "chosen row" rule has to outweigh it or selection silently
+   loses to the resting style. */
+a.w-tab-link.w--current .pricing-radio-card.white,
+a.w-tab-link.w--current .pricing-radio-card.version-b.full._92height,
+a.w-tab-link.w--current .pricing-radio-card.version-b.full._92height.teal-blur {
+  background-color: var(--color-eel-light) !important;
+  border: 2px solid var(--color-ecto-green) !important;
+  border-bottom: 4px solid var(--color-ecto-press) !important;
+}
+a.w-tab-link.w--current .radio-default,
+a.w-tab-link.w--current .radio-default.white {
+  border: 6px solid var(--color-ecto-green) !important;
+  background-color: var(--color-paper);
+}
+
+/* "Most popular" hangs in the gap between two rows once it loses its fill, so
+   it straddles its own row's top border instead — outlined, not filled, so it
+   reads as a label on that row rather than a second selection. */
+.special-offer-rose {
+  top: -13px !important;
+  right: 14px !important;
+  background-color: var(--color-paper) !important;
+  border: 2px solid var(--color-ecto-green) !important;
+  border-radius: 999px !important;
+  padding: 2px 10px !important;
+  gap: 5px;
+}
+
+/* Ash is tuned for white; on the selected row's lime wash it drops to 4.2:1,
+   so the muted text steps one notch darker there. Still lighter than the plan
+   name, so the hierarchy inside the row is unchanged. */
+a.w-tab-link.w--current .crossed-price .geist-14px,
+a.w-tab-link.w--current .crossed-price .geist-14px.quartenary,
+a.w-tab-link.w--current .geist-14px.pricing-card-details { color: var(--color-charcoal) !important; }
+
+/* The radio is redundant here. The row already says which plan is chosen —
+   lime ground, green border, darker green edge — and the control adds a second
+   thing to look at on every row to restate it. Selection stays clickable on the
+   whole row, exactly as before. */
+.radio-default, .radio-default.white { display: none !important; }
+
+/* With the control gone, selection was carried by hue alone — white and the
+   lime wash sit at 1.00 and 0.89 lightness, so in greyscale the rows are almost
+   identical. The chosen row gets a heavier edge too, which is a shape cue that
+   survives without colour. box-sizing is border-box, so the row does not resize. */
+a.w-tab-link.w--current .pricing-radio-card.white,
+a.w-tab-link.w--current .pricing-radio-card.version-b.full._92height,
+a.w-tab-link.w--current .pricing-radio-card.version-b.full._92height.teal-blur {
+  border-width: 3px !important;
+  border-bottom-width: 6px !important;
+}
