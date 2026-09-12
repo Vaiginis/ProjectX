@@ -2696,5 +2696,23 @@ html, body { margin: 0; min-height: 100%; }
   .ck-panel { border-radius: 24px 24px 0 0; max-height: 96dvh; }
 }
 
+/* The mobile sticky CTA stands down while the plans are on screen (app.js).
+   It fades rather than switching off: display:none would also collapse its 88px
+   of flow height, shifting the page under the reader at the exact moment the
+   plans arrive. Opacity keeps the space, so nothing moves. */
+.sticky-button {
+  transition: opacity .28s ease, transform .28s ease, visibility 0s;
+}
+.sticky-button.stand-down {
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity .28s ease, transform .28s ease, visibility 0s linear .28s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sticky-button, .sticky-button.stand-down { transition: opacity .01s linear; transform: none; }
+}
+
 /* de-brand: collapse wrappers left empty by removed third-party rating badges */
 .div-block-60:empty { display: none; }

@@ -261,6 +261,25 @@
       target && target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }));
 
+    // The sticky "Get started" bar (mobile only) exists to send you to the plans.
+    // Once the plan cards themselves are on screen it has nothing left to do and
+    // sits on top of them, so it stands down while they are in view and comes
+    // back below them. Watch the card list, not the whole pricing section — the
+    // section starts a screenful earlier, at the heading.
+    // All three currency blocks are observed because only one is ever displayed
+    // and which one that is gets decided later, in enter(); a hidden block never
+    // reports as intersecting, so the visible one is the only one that counts.
+    const stickyBar = $('.sticky-button', root);
+    const planLists = $$('.section-pricing .w-tab-menu', root);
+    if (stickyBar && planLists.length && 'IntersectionObserver' in window) {
+      const onScreen = new Set();
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => e.isIntersecting ? onScreen.add(e.target) : onScreen.delete(e.target));
+        stickyBar.classList.toggle('stand-down', onScreen.size > 0);
+      }, { threshold: 0, rootMargin: '0px 0px 120px 0px' }); // clear the 88px bar before the first card arrives
+      planLists.forEach(el => io.observe(el));
+    }
+
     // plan CTA → checkout modal
     $$('.pricing-cta', root).forEach(a => a.addEventListener('click', e => {
       e.preventDefault();

@@ -434,5 +434,20 @@
 
 
 <script src="app.js"></script>
-<div id="proto-banner" style="position:fixed;left:0;right:0;bottom:0;z-index:99999;background:#1D1D1F;color:#fff;font:500 12px/1.4 -apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;text-align:center;padding:7px 12px;letter-spacing:.01em">Prototype — design study only. Not a real product; no payments, reviews or ratings here are real.</div></body>
+<div id="proto-banner" style="position:fixed;left:0;right:0;bottom:0;z-index:99999;background:#1D1D1F;color:#fff;font:500 12px/1.4 -apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;text-align:center;padding:7px 12px;letter-spacing:.01em">Prototype — design study only. Not a real product; no payments, reviews or ratings here are real.</div>
+<script>
+/* The banner is here because this page shows placeholder reviews, ratings and a
+   guarantee, and the deployed copy is publicly reachable. It only gets in the
+   way when you are looking at the design, so it goes away off the public host.
+   Visible by default, hidden by script — if this script never runs, the notice
+   is still there. Add ?proto to force it back on locally. */
+(function () {
+  var local = /^(localhost|127\.0\.0\.1|\[::1\]|.*\.local)$/.test(location.hostname)
+           || location.protocol === 'file:';
+  if (local && !/[?&]proto\b/.test(location.search)) {
+    var b = document.getElementById('proto-banner');
+    if (b) b.remove();
+  }
+})();
+</script></body>
 </html>
