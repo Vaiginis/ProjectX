@@ -1,0 +1,542 @@
+/* ============================================================================
+   Variant B — "green playground" theme
+   ----------------------------------------------------------------------------
+   Loads AFTER ../styles.css and repaints it. Same markup, same copy, same flow
+   logic as variant A — the only variable in the A/B test is this file.
+
+   System rules (from the style reference):
+     · one radius: 12px, everywhere
+     · depth comes from solid borders, never from blurred shadows
+     · no gradients — flat solid colour only
+     · one saturated green carries every primary action and display heading
+     · the lighter lime is an OUTLINE colour, never a fill
+     · rounded sans (Nunito) for UI, heavy tight sans (Inter 800) for display
+   ========================================================================== */
+
+:root {
+  /* --- palette ------------------------------------------------------------ */
+  --color-ecto-green: #58cc02;   /* primary action fill, display headings      */
+  --color-ecto-press: #46a302;   /* the darker edge under a green button       */
+  --color-lingot-lime: #a5ed6e;  /* outline / border accent — never a fill     */
+  --color-eel-light: #d7ffb8;    /* soft wash for selected surfaces            */
+  --color-macaw-blue: #1cb0f6;   /* secondary action                           */
+  --color-macaw-press: #1899d6;
+  --color-eel-dark-blue: #042c60; /* heading text                              */
+  --color-midnight: #000437;
+  --color-graphite: #3c3c3c;     /* structural borders + primary text          */
+  --color-ash: #777777;          /* secondary text                             */
+  --color-charcoal: #4b4b4b;     /* body copy                                  */
+  --color-hairline: #e5e5e5;     /* the resting border on every card           */
+  --color-paper: #ffffff;
+
+  --font-din-round: 'Nunito', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-feather: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --tracking-ui: .053em;
+
+  --radius: 12px;
+
+  /* --- remap variant A's tokens onto the new system ----------------------- */
+  --font-family: var(--font-din-round);
+  --font-family-ideax: var(--font-din-round);
+
+  --candy-grape-fizz: var(--color-ecto-green);
+  --brand-7: var(--color-ecto-green);
+  --brand-8: var(--color-ecto-press);
+  --brand-9: var(--color-ecto-press);
+  --brand-10: var(--color-eel-dark-blue);
+  --brand-11: var(--color-eel-dark-blue);
+  --brand-12: var(--color-midnight);
+  --brand-6: var(--color-lingot-lime);
+  --brand-5: var(--color-lingot-lime);
+  --brand-4: var(--color-lingot-lime);
+  --brand-3: var(--color-eel-light);
+  --brand-2: var(--color-eel-light);
+  --brand-1: #f4fff0;
+
+  --teal-7: var(--color-macaw-blue);
+  --teal-8: var(--color-macaw-press);
+  --teal-11: var(--color-eel-dark-blue);
+  --teal-3: #cbecfd;
+  --teal-2: #e8f7ff;
+  --teal-1: #f5fbff;
+
+  --green-7: var(--color-ecto-green);
+  --green-3: var(--color-eel-light);
+  --green-2: #eaffdb;
+  --green-1: #f4fff0;
+
+  /* no orange in this system — the sticky CTA becomes the primary green */
+  --orange-7: var(--color-ecto-green);
+  --orange-3: var(--color-eel-light);
+  --orange-2: #f4fff0;
+  --orange-1: #f4fff0;
+
+  --gray-11: var(--color-graphite);
+  --gray-12: var(--color-graphite);
+  --gray-9: var(--color-charcoal);
+  --gray-10: var(--color-charcoal);
+  --gray-8: var(--color-ash);
+  --gray-7: var(--color-ash);
+  --gray-6: var(--color-ash);
+  --gray-30: var(--color-hairline);
+  --gray-20: var(--color-hairline);
+  --gray-15: var(--color-hairline);
+  --gray-4: var(--color-hairline);
+  --gray-3: var(--color-hairline);
+  --gray-2: #f7f7f7;
+  --gray-1: #fbfbfb;
+  --gray-5-old: #f7f7f7;
+  --gray-10-old: #f7f7f7;
+}
+
+/* ---------------------------------------------------------------------------
+   1. Base — white canvas, rounded type, open tracking
+   ------------------------------------------------------------------------ */
+html, body,
+body.body-dots,
+body.body-dots.gray,
+body.body-dots.gray-ui2 {
+  background: var(--color-paper);
+  background-image: none;
+  font-family: var(--font-din-round);
+  color: var(--color-charcoal);
+}
+
+body, button, input, select, textarea,
+.quiz-p1, .quiz-p2, .desc-quiz, .option_text, .pricing-text,
+.geist-14px, .geist-16px, .geist-18px, .geist-18-px, .geist-22-px,
+.answer-item-text, .answer-summary-text, .boolean-text, .quiz-consent-text {
+  font-family: var(--font-din-round);
+  letter-spacing: var(--tracking-ui);
+}
+
+/* ---------------------------------------------------------------------------
+   2. Depth is border-based. Kill every shadow and gradient in the base sheet.
+   ------------------------------------------------------------------------ */
+*, *::before, *::after { box-shadow: none !important; }
+
+.pricing-radio-card,
+.pricing-radio-card.version-b.full._92height.teal-blur,
+.pricing-radio-card.version-b.full._92height.teal-blur.exitoffer,
+.possibility-line,
+.section-pricing,
+.quiz-body-hero,
+.quiz-body-loader { background-image: none; }
+
+.pricing-radio-card { background-color: var(--color-paper); border: 2px solid var(--color-hairline); }
+.possibility-line { background-color: var(--color-ecto-green); }
+
+/* ---------------------------------------------------------------------------
+   3. One radius
+   ------------------------------------------------------------------------ */
+.ideax-button, .quiz_button, .radio_option, .checkbox_option, .boolean-option,
+.pricing-radio-card, .pricing-cta, .option_icon_container, .answear_icon_container,
+.ck-panel, .ck-plan, .ck-input, .ck-continue, .quiz_image, .review-v2,
+.money-back-badge, .uui-badge-small-success-2, .price-tag, .price-tag-container,
+.tag-price-content, .plan-title-tag, .div-block-168, .div-block-170,
+.div-block-171, .div-block-173, .answer-summary-container, .quiz-answer-hero,
+.div-block-405, .image-container-first-question-laptop, .form_other_input,
+.quiz_input, .discount-in-button, .horizontal-bullets,
+.approach-bullet-in-pricing, .socialproofs-pricing-v2 {
+  border-radius: var(--radius) !important;
+}
+
+/* form controls and avatars stay circular — they read as controls, not cards */
+.option_element_radio, .radio-default, .photo, .review-image,
+.circle-progress, .q-mini-loader, .star { border-radius: 999px !important; }
+.option_element_checkbox { border-radius: 4px !important; }
+
+/* ---------------------------------------------------------------------------
+   4. Typography — feather shouts, din-round explains
+   ------------------------------------------------------------------------ */
+.quiz-h1 {
+  font-family: var(--font-feather);
+  font-weight: 800;
+  letter-spacing: -.02em;
+  line-height: 1.2;
+  color: var(--color-eel-dark-blue);
+}
+.quiz-h1 .claude-orange { color: var(--color-ecto-green); }
+
+.quiz-h2, .quiz-h2.heading2-quiz {
+  font-family: var(--font-feather);
+  font-weight: 800;
+  letter-spacing: -.02em;
+  line-height: 1.2;
+  color: var(--color-eel-dark-blue);
+}
+
+.quiz-h3, .desc-quiz {
+  font-family: var(--font-din-round);
+  font-weight: 700;
+  letter-spacing: var(--tracking-ui);
+  color: var(--color-eel-dark-blue);
+}
+
+.geist-36px, .geist-32px {
+  font-family: var(--font-feather);
+  font-weight: 800;
+  letter-spacing: -.02em;
+  color: var(--color-eel-dark-blue);
+}
+
+.quiz-p1, .quiz-consent-text { color: var(--color-ash); }
+.green-text, .teal, .medium-teal { color: var(--color-ecto-green) !important; }
+
+/* ---------------------------------------------------------------------------
+   5. Buttons — filled green with a solid pressable edge underneath
+   ------------------------------------------------------------------------ */
+.ideax-button,
+.quiz_button {
+  font-family: var(--font-din-round);
+  font-weight: 800;
+  letter-spacing: var(--tracking-ui);
+  text-transform: uppercase;
+  background-color: var(--color-ecto-green);
+  border: 2px solid var(--color-ecto-green);
+  border-bottom: 5px solid var(--color-ecto-press);
+  border-radius: var(--radius);
+  color: var(--color-paper);
+  transition: transform .06s ease, background-color .12s ease;
+}
+.ideax-button:hover, .quiz_button:hover { background-color: #61d904; border-color: #61d904; border-bottom-color: var(--color-ecto-press); }
+.ideax-button:active, .quiz_button:active {
+  background-color: var(--color-ecto-press);
+  border-color: var(--color-ecto-press);
+  border-bottom-width: 2px;
+  transform: translateY(3px);
+}
+.ideax-button._3d-ui { margin-bottom: 0; }
+
+/* ghost / secondary — the border IS the identity */
+.ideax-button.white,
+.ideax-button._3d-ui._64px.white,
+.quiz_button.secondary {
+  background-color: var(--color-paper);
+  border: 2px solid var(--color-lingot-lime);
+  border-bottom: 5px solid var(--color-lingot-lime);
+  color: var(--color-ecto-green);
+}
+.ideax-button.white:hover, .quiz_button.secondary:hover { background-color: #f6ffee; border-color: var(--color-lingot-lime); }
+
+/* the disabled next button keeps its shape, drops its colour */
+.quiz_button.disabled, .quiz_button._w-margins.disabled {
+  background-color: var(--color-hairline);
+  border-color: var(--color-hairline);
+  border-bottom-color: #d0d0d0;
+  color: var(--color-ash);
+  opacity: 1;
+}
+
+.quiz_button_text, .button-text-pricing, .quiz-answer-hero {
+  font-family: var(--font-din-round);
+  font-weight: 800;
+  letter-spacing: var(--tracking-ui);
+  text-transform: uppercase;
+}
+
+/* hero answer cards */
+.div-block-405 { border: 2px solid var(--color-hairline); border-bottom-width: 5px; background: var(--color-paper); }
+.options-bottom-button-purple .quiz-answer-hero { color: var(--color-paper); }
+.options-bottom-button-purple { background-color: var(--color-ecto-green); border-radius: var(--radius); }
+.level-option:hover .div-block-405 { border-color: var(--color-lingot-lime); }
+
+/* ---------------------------------------------------------------------------
+   6. Answer options — white card, thick edge, lime wash when chosen
+   ------------------------------------------------------------------------ */
+.radio_option, .checkbox_option, .boolean-option,
+.radio_option.ui2, .checkbox_option.ui2, .boolean-option.ui2 {
+  background-color: var(--color-paper);
+  border: 2px solid var(--color-hairline);
+  border-bottom-width: 4px;
+  border-radius: var(--radius);
+  transition: background-color .12s ease, border-color .12s ease;
+}
+.radio_option:hover, .checkbox_option:hover, .boolean-option:hover {
+  background-color: #f6ffee;
+  border-color: var(--color-lingot-lime);
+}
+.radio_option.selected, .radio_option.ui2.selected,
+.checkbox_option.checked, .checkbox_option.ui2.checked,
+.boolean-option.selected, .boolean-option.ui2.selected {
+  background-color: var(--color-eel-light);
+  border-color: var(--color-ecto-green);
+}
+.radio_option:active, .radio_option.ui2:active,
+.boolean-option.ui2:active { border-color: var(--color-ecto-green); }
+
+.option_text, .boolean-text {
+  color: var(--color-eel-dark-blue);
+  font-weight: 700;
+  letter-spacing: var(--tracking-ui);
+}
+.radio_option.selected .option_text,
+.checkbox_option.checked .option_text,
+.boolean-option.selected .boolean-text { color: var(--color-ecto-press); }
+
+.option_element_radio { border: 2px solid var(--color-hairline); }
+.radio_option.selected .option_element_radio { border: 5px solid var(--color-ecto-green) !important; }
+.option_element_checkbox { border: 2px solid var(--color-hairline); }
+.checkbox_option.checked .option_element_checkbox {
+  background-color: var(--color-ecto-green) !important;
+  border-color: var(--color-ecto-green) !important;
+}
+.option_icon_container, .option_icon_container.ui2 { background-color: #f6ffee; }
+
+/* ---------------------------------------------------------------------------
+   7. Progress + header
+   ------------------------------------------------------------------------ */
+.section_progress_path { background-color: var(--color-hairline); height: 8px; border-radius: 999px; }
+.section_progress_line { background-color: var(--color-ecto-green); border-radius: 999px; }
+.quiz-header { border-bottom: 2px solid var(--color-hairline); background-color: var(--color-paper); }
+
+/* ---------------------------------------------------------------------------
+   8. Analyzing screen
+   ------------------------------------------------------------------------ */
+.circle-progress .ring .ring-fg { stroke: var(--color-ecto-green); }
+.circle-progress .ring .ring-bg { stroke: var(--color-hairline); }
+.q-preference-item.is-done .desc-quiz { color: var(--color-ecto-press) !important; }
+.mini-loader-line1, .mini-loader-line2, .mini-loader-line3, .mini-loader-line4,
+.mini-loader-corner { border-color: var(--color-ecto-green); background-color: var(--color-ecto-green); }
+
+/* ---------------------------------------------------------------------------
+   9. Paywall
+   ------------------------------------------------------------------------ */
+.pricing-radio-card.white,
+.pricing-radio-card.white.version-b.full._92height,
+.pricing-radio-card.version-b.full._92height.teal-blur {
+  background-color: var(--color-paper);
+  border: 2px solid var(--color-hairline);
+  border-bottom-width: 4px;
+}
+.w-tab-link.w--current .pricing-radio-card,
+.pricing-p1.w--current .radio-default,
+.pricing-p2.w--current .radio-default,
+.pricing-p3.w--current .radio-default.white,
+.pricing1.w--current .radio-default,
+.pricing2.w--current .radio-default,
+.pricing3.w--current .radio-default.white {
+  border: 4px solid var(--color-ecto-green) !important;
+}
+.w-tab-link.w--current .pricing-radio-card { background-color: var(--color-eel-light); }
+
+.price-tag, .price-tag-container, .tag-price-content,
+.uui-badge-small-success-2, .discount-in-button {
+  background-color: var(--color-ecto-green);
+  border-color: var(--color-ecto-green);
+  color: var(--color-paper);
+}
+.plan-title-tag { border: 2px solid var(--color-hairline); }
+.crossed-price, .red-line { color: var(--color-ash); }
+.geist-pricing-price, .pricing-text.semibold { color: var(--color-eel-dark-blue); }
+
+.pricing-cta {
+  background-color: var(--color-ecto-green);
+  border: 2px solid var(--color-ecto-green);
+  border-bottom: 5px solid var(--color-ecto-press);
+}
+.money-back-badge, .guarantee-icon, .square-teal { border-color: var(--color-macaw-blue); color: var(--color-macaw-blue); }
+.review-v2 { border: 2px solid var(--color-hairline); background: var(--color-paper); }
+.star { background-color: transparent; }
+
+/* ---------------------------------------------------------------------------
+   10. Checkout modal
+   ------------------------------------------------------------------------ */
+.ck-panel { font-family: var(--font-din-round); color: var(--color-charcoal); border: 2px solid var(--color-graphite); border-radius: var(--radius); }
+.ck-title { font-family: var(--font-feather); font-weight: 800; letter-spacing: -.02em; color: var(--color-eel-dark-blue); }
+.ck-head { border-bottom: 2px solid var(--color-hairline); }
+.ck-plan { border: 2px solid var(--color-hairline); border-bottom-width: 4px; }
+.ck-badge { background: var(--color-eel-light); color: var(--color-ecto-press); }
+.ck-input { border: 2px solid var(--color-hairline); }
+.ck-input:focus { border-color: var(--color-macaw-blue); }
+.ck-continue {
+  background-color: var(--color-ecto-green);
+  border: 2px solid var(--color-ecto-green);
+  border-bottom: 5px solid var(--color-ecto-press);
+  text-transform: uppercase;
+  font-weight: 800;
+}
+.ck-prices b, .ck-perday { color: var(--color-eel-dark-blue); }
+.ck-guarantee { color: var(--color-charcoal); }
+
+/* ---------------------------------------------------------------------------
+   11. Focus — visible, and outline-based since shadows are gone
+   ------------------------------------------------------------------------ */
+:focus-visible { outline: 3px solid var(--color-macaw-blue); outline-offset: 2px; }
+
+/* links keep the highlighter-pen treatment */
+.policies-link, .tp-tag-text a {
+  color: var(--color-macaw-blue);
+  text-decoration: none;
+  border-bottom: 2px solid var(--color-macaw-blue);
+}
+
+/* ---------------------------------------------------------------------------
+   12. Inline SVG — the markup carries variant A's hexes as presentation
+   attributes. CSS beats a presentation attribute, so retint them here rather
+   than forking the HTML (which would let the two variants drift).
+   ------------------------------------------------------------------------ */
+[stroke="#7852F4"], [stroke="#7852f4"] { stroke: var(--color-ecto-green); }
+[fill="#7852F4"],   [fill="#7852f4"]   { fill:   var(--color-ecto-green); }
+[stroke="#15BC9E"], [stroke="#15bc9e"] { stroke: var(--color-ecto-green); }
+[fill="#15BC9E"],   [fill="#15bc9e"]   { fill:   var(--color-ecto-green); }
+[fill="#0A9982"]                       { fill:   var(--color-ecto-press); }
+[fill="#FF602E"]                       { fill:   var(--color-ecto-green); }
+[fill="#D9F7F0"]                       { fill:   var(--color-eel-light); }
+[fill="#F3F1FD"], [fill="#E8E4FB"]     { fill:   var(--color-eel-light); }
+[fill="#FEC132"]                       { fill:   #ffc800; }  /* rating stars — gold, the one warm note */
+
+/* ---------------------------------------------------------------------------
+   13. Hero answer cards — the one place uppercase + wide tracking overflowed
+   ------------------------------------------------------------------------ */
+.options-bottom-button-purple {
+  background-color: var(--color-ecto-green);
+  border: 2px solid var(--color-ecto-green);
+  border-bottom: 5px solid var(--color-ecto-press);
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+.quiz-answer-hero, .quiz-answer-hero.ui-button-purple {
+  letter-spacing: .01em;
+  white-space: nowrap;
+  text-align: center;
+  font-weight: 800;
+}
+.div-block-405 { min-height: 204px; justify-content: space-between; }
+.level-option:active .options-bottom-button-purple {
+  background-color: var(--color-ecto-press);
+  border-bottom-width: 2px;
+  transform: translateY(3px);
+}
+
+/* ---------------------------------------------------------------------------
+   14. Specificity catch-ups
+   Variant A styles several of these with two- and three-class selectors, so a
+   single-class override in section 5 loses. Same rules, matched weight.
+   ------------------------------------------------------------------------ */
+.ideax-button._3d-ui,
+.ideax-button._3d-ui._64px,
+.ideax-button._3d-ui.orange,
+.ideax-button._3d-ui.get-started-cta,
+.ideax-button._3d-ui._64px.pricing-cta {
+  background-color: var(--color-ecto-green);
+  border: 2px solid var(--color-ecto-green);
+  border-bottom: 5px solid var(--color-ecto-press);
+  border-radius: var(--radius);
+  margin-bottom: 0;
+  color: var(--color-paper);
+}
+.ideax-button._3d-ui:hover,
+.ideax-button._3d-ui.orange:hover { background-color: #61d904; border-color: #61d904; border-bottom-color: var(--color-ecto-press); }
+.ideax-button._3d-ui:active,
+.ideax-button._3d-ui.orange:active {
+  background-color: var(--color-ecto-press);
+  border-color: var(--color-ecto-press);
+  border-bottom-width: 2px;
+  transform: translateY(3px);
+}
+.ideax-button._3d-ui._64px.white {
+  background-color: var(--color-paper);
+  border-color: var(--color-lingot-lime);
+  border-bottom-color: var(--color-lingot-lime);
+  color: var(--color-ecto-green);
+}
+.ideax-button, .ideax-button:link, .ideax-button:visited { color: var(--color-paper); }
+
+/* ---------------------------------------------------------------------------
+   15. Result screen — headline, marker highlight, caret, pricing text
+   ------------------------------------------------------------------------ */
+.geist-h1, .geist-h1._34-mobile {
+  font-family: var(--font-feather);
+  font-weight: 800;
+  letter-spacing: -.02em;
+  line-height: 1.2;
+  color: var(--color-eel-dark-blue);
+}
+.geist-h1.purple, .geist-36px.purple-text, .geist-14px.purple, .geist-18-px.center.purple,
+.geist-20-px.center.purple, .quiz-p1.purple-text, .semi-bold.purple, .text-purple,
+.purple-text, .purple { color: var(--color-ecto-green); }
+
+/* the highlighter-pen wash behind the animated headline word */
+.highlight-green { background-color: var(--color-eel-light); }
+.highlight-green.course.js.result { background-color: #f0ffe2; }
+
+/* typing caret */
+.div-block-64, .pointer-bigger { background-color: var(--color-ecto-green); }
+
+/* this label sat on variant A's near-black card; the card is white here */
+.geist-18-px.pricing-card-highlight { color: var(--color-ash); }
+.geist-14px.white.semibold { color: var(--color-paper); }
+.pricing-text, .pricing-text.wider, .uui-text-size-small-geist.gray { color: var(--color-ash); }
+.tp-tag-text, .tp-tag-text.center.fixed-v2 { color: var(--color-graphite); }
+
+/* the three-stop gradient bar becomes one flat green track */
+.possibility-line { background-image: none; background-color: var(--color-ecto-green); }
+.possibility-score-dot, .possibility-tag { border-color: var(--color-ecto-green); }
+.geist-18-px.teal-text { color: var(--color-ecto-green); }
+.best-fit-tag-bigger-teal { background-color: var(--color-macaw-blue); border-color: var(--color-macaw-press); }
+
+/* ---------------------------------------------------------------------------
+   16. A visible bottom edge on resting cards — otherwise the press has no depth
+   ------------------------------------------------------------------------ */
+.radio_option, .checkbox_option, .boolean-option,
+.radio_option.ui2, .checkbox_option.ui2, .boolean-option.ui2,
+.div-block-405, .pricing-radio-card.white,
+.pricing-radio-card.white.version-b._92height, .ck-plan { border-bottom-color: #d4d4d4; }
+.radio_option.selected, .radio_option.ui2.selected,
+.checkbox_option.checked, .checkbox_option.ui2.checked,
+.boolean-option.selected, .boolean-option.ui2.selected { border-bottom-color: var(--color-ecto-press); }
+
+/* ---------------------------------------------------------------------------
+   17. Flat white — no texture, no gradient wash behind the result hero.
+   cursor-purple.svg is a baked-in purple asset; the .pointer-bigger div next to
+   it already draws the same caret, so hide the image and let CSS draw it.
+   ------------------------------------------------------------------------ */
+.section-hero, .section-hero.data-analyst { background-image: none; background-color: var(--color-paper); }
+.cursor-purple { display: none; }
+.heading-highlight-bigger .pointer-bigger { background-color: var(--color-ecto-green); }
+
+/* ---------------------------------------------------------------------------
+   18. Legibility
+   White on #58cc02 is only 2.1:1. The reference is explicit about this: Midnight
+   is the button label colour on green fills. Green as TEXT on a light surface
+   needs to go darker still, so the fill green and the ink green are separate
+   tokens — same hue, different jobs.
+   ------------------------------------------------------------------------ */
+:root { --color-ecto-ink: #3a8500; }  /* 4.6:1 on white */
+
+/* labels sitting on a green fill */
+.ideax-button, .ideax-button:link, .ideax-button:visited,
+.ideax-button._3d-ui, .ideax-button._3d-ui._64px, .ideax-button._3d-ui.orange,
+.ideax-button._3d-ui.get-started-cta, .ideax-button._3d-ui._64px.pricing-cta,
+.quiz_button, .quiz_button_text, .button-text-pricing, .ck-continue,
+.options-bottom-button-purple .quiz-answer-hero,
+.price-tag, .price-tag-container, .tag-price-content, .discount-in-button,
+.uui-badge-small-success-2:not(.square-teal):not(.dark) { color: var(--color-midnight); }
+
+.price-tag .geist-14px, .price-tag-container .geist-14px, .tag-price-content .geist-14px,
+.tag-price-content .geist-pricing-price,
+.geist-14px.white.semibold, .geist-pricing-price.white,
+.geist-14px.pricing-card-details { color: var(--color-midnight); }
+
+/* ghost buttons keep the green, but the darker ink version */
+.ideax-button.white, .ideax-button._3d-ui._64px.white, .quiz_button.secondary { color: var(--color-ecto-ink); }
+
+/* green used as text anywhere on a light surface */
+.geist-h1.purple, .geist-36px.purple-text, .geist-14px.purple, .geist-18-px.center.purple,
+.geist-20-px.center.purple, .quiz-p1.purple-text, .semi-bold.purple, .text-purple,
+.purple-text, .purple, .green-text, .teal, .medium-teal, .geist-16px.teal,
+.geist-18-px.teal-text, .geist-16px.green-text.medium-teal,
+.geist-16px.medium.orange, .orange { color: var(--color-ecto-ink) !important; }
+
+.radio_option.selected .option_text,
+.checkbox_option.checked .option_text,
+.boolean-option.selected .boolean-text,
+.q-preference-item.is-done .desc-quiz { color: var(--color-ecto-ink) !important; }
+
+/* the pale teal / pale orange chrome around the countdown becomes one green wash */
+.sticky-timer { background-color: #f4fff0; border-bottom-color: var(--color-eel-light); }
+.div-block-166, .timer-exit, .timer-exit.sticky { background-color: var(--color-eel-light); }
+.sticky-timer-exit-offer, .sticky-timer-exit-offer.w--current { background-color: #f4fff0; border-bottom-color: var(--color-eel-light); }
+.uui-badge-small-success-2.square-teal { background-color: #e8f7ff; color: var(--color-macaw-press); }
+.uui-badge-small-success-2.square-orange { background-color: var(--color-eel-light); }
