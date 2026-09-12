@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "quiz",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["/private/tmp/claude-501/-Users-skeptoriuskolektorius-Desktop-IDEA-X/ae9c2481-82e7-4f8b-8405-6259b16b1dd0/scratchpad/serve.py"],
+      "port": 8765
+    }
+  ]
+}
