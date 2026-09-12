@@ -290,8 +290,11 @@
       const cur = $('.tag-price-content .geist-14px', card);
       const sym = cur ? cur.textContent.trim() : '€';
       const perDay = `${sym}${text('.geist-pricing-price')}.${$$('.tag-price-content .geist-14px', card)[1]?.textContent.trim() || ''}/Day`;
+      // "12 Weeks" -> "12-week Plan"; "1 Week Trial" -> "1-week Trial"
+      const planName = text('.plan-title-tag .geist-18-px');
+      const weeks = (planName.match(/(\d+)\s*weeks?/i) || [])[1];
       openCheckout({
-        title: text('.plan-title-tag .geist-18-px').replace(/s$/i, '').toLowerCase().replace(' ', '-'),
+        title: weeks ? `${weeks}-week ${/trial/i.test(planName) ? 'Trial' : 'Plan'}` : planName,
         badge: text('.uui-badge-small-success-2') || '',
         old: prices[0] || '', new: prices[1] || '', perDay,
       });
