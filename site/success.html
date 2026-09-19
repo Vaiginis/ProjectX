@@ -52,19 +52,16 @@ fbq('init', '28948852661366483');
 fbq('init', '1553171279426030');
 fbq('track', 'PageView');
 
-/* Purchase. This page is static, so it cannot ask Stripe what was bought —
-   each payment link carries its own ?plan= on its success URL and we map that
-   to the price actually charged.
-
-   Two guards:
-   1. A recognised plan must be present. Without it, anyone opening
-      /success.html directly would report a sale and poison the optimisation.
-   2. The sale is only counted once. This page fires on load, so a refresh or a
-      revisit from history would otherwise report the same purchase again. We
-      key on Stripe's checkout session id when the link passes one, and fall
-      back to the plan plus the day when it does not. The key doubles as the
-      Meta eventID, so a future Conversions API webhook deduplicates against
-      the same sale rather than counting it twice. */
+/* Purchase, browser side.
+ *
+ * The authoritative event comes from the Stripe webhook (see /worker) when the
+ * money actually lands. This copy exists only to add the browser signals —
+ * cookies, user agent — that improve Meta's match rate. Both carry the SAME
+ * event_id, Stripe's checkout session id, so Meta collapses them into one.
+ *
+ * It therefore fires only when the payment link passes ?sid=. Without that id
+ * there is nothing to deduplicate against, and firing anyway would report the
+ * sale twice — once here, once from the webhook. */
 (function () {
   var PLANS = {
     '1w':  { value: 9.49,  name: '1-week Trial' },
@@ -72,17 +69,14 @@ fbq('track', 'PageView');
     '12w': { value: 37.49, name: '12-week Plan' }
   };
   var q = new URLSearchParams(location.search);
-  var key = q.get('plan');
-  var plan = PLANS[key];
-  if (!plan) return;
-
+  var plan = PLANS[q.get('plan')];
   var sid = q.get('sid');
-  var eventId = 'purchase:' + (sid || key + ':' + new Date().toISOString().slice(0, 10));
+  if (!plan || !sid || sid.charAt(0) !== 'c') return;   // no id, or Stripe did not substitute it
 
-  try {
+  try {                                                  // a refresh must not resend
     var seen = JSON.parse(localStorage.getItem('ivio-purchases') || '[]');
-    if (seen.indexOf(eventId) !== -1) return;          // already counted
-    seen.push(eventId);
+    if (seen.indexOf(sid) !== -1) return;
+    seen.push(sid);
     localStorage.setItem('ivio-purchases', JSON.stringify(seen.slice(-50)));
   } catch (e) { /* private mode: fire once rather than not at all */ }
 
@@ -91,7 +85,7 @@ fbq('track', 'PageView');
     currency: 'EUR',
     content_name: plan.name,
     content_type: 'product'
-  }, { eventID: eventId });
+  }, { eventID: sid });
 })();
 </script>
 <noscript><img height="1" width="1" style="display:none"
