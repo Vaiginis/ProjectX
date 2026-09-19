@@ -38,6 +38,49 @@
   .help { margin-top: 30px; font-size: 14px; color: var(--ash); }
   @media (max-width: 600px) { h1 { font-size: 31px; } .wrap { padding-top: 36px; } }
 </style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '28948852661366483');
+fbq('init', '1553171279426030');
+fbq('track', 'PageView');
+
+/* Purchase. This page is static, so it cannot ask Stripe what was bought —
+   each payment link carries its own ?plan= on its success URL and we map that
+   to the price actually charged.
+
+   Deliberately gated on a recognised plan: without the guard, anyone opening
+   /success.html directly would report a sale and poison the ad optimisation. */
+(function () {
+  var PLANS = {
+    '1w':  { value: 9.49,  name: '1-week Trial' },
+    '4w':  { value: 19.49, name: '4-week Plan' },
+    '12w': { value: 37.49, name: '12-week Plan' }
+  };
+  var plan = PLANS[new URLSearchParams(location.search).get('plan')];
+  if (!plan) return;
+  fbq('track', 'Purchase', {
+    value: plan.value,
+    currency: 'EUR',
+    content_name: plan.name,
+    content_type: 'product'
+  });
+})();
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=28948852661366483&ev=PageView&noscript=1"
+/></noscript>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1553171279426030&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 </head>
 <body>
 <header class="top">
