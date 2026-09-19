@@ -56,22 +56,42 @@ fbq('track', 'PageView');
    each payment link carries its own ?plan= on its success URL and we map that
    to the price actually charged.
 
-   Deliberately gated on a recognised plan: without the guard, anyone opening
-   /success.html directly would report a sale and poison the ad optimisation. */
+   Two guards:
+   1. A recognised plan must be present. Without it, anyone opening
+      /success.html directly would report a sale and poison the optimisation.
+   2. The sale is only counted once. This page fires on load, so a refresh or a
+      revisit from history would otherwise report the same purchase again. We
+      key on Stripe's checkout session id when the link passes one, and fall
+      back to the plan plus the day when it does not. The key doubles as the
+      Meta eventID, so a future Conversions API webhook deduplicates against
+      the same sale rather than counting it twice. */
 (function () {
   var PLANS = {
     '1w':  { value: 9.49,  name: '1-week Trial' },
     '4w':  { value: 19.49, name: '4-week Plan' },
     '12w': { value: 37.49, name: '12-week Plan' }
   };
-  var plan = PLANS[new URLSearchParams(location.search).get('plan')];
+  var q = new URLSearchParams(location.search);
+  var key = q.get('plan');
+  var plan = PLANS[key];
   if (!plan) return;
+
+  var sid = q.get('sid');
+  var eventId = 'purchase:' + (sid || key + ':' + new Date().toISOString().slice(0, 10));
+
+  try {
+    var seen = JSON.parse(localStorage.getItem('ivio-purchases') || '[]');
+    if (seen.indexOf(eventId) !== -1) return;          // already counted
+    seen.push(eventId);
+    localStorage.setItem('ivio-purchases', JSON.stringify(seen.slice(-50)));
+  } catch (e) { /* private mode: fire once rather than not at all */ }
+
   fbq('track', 'Purchase', {
     value: plan.value,
     currency: 'EUR',
     content_name: plan.name,
     content_type: 'product'
-  });
+  }, { eventID: eventId });
 })();
 </script>
 <noscript><img height="1" width="1" style="display:none"
