@@ -31,11 +31,16 @@ export default {
       event = await verifyStripeSignature(payload, signature, env.STRIPE_WEBHOOK_SECRET);
     } catch (err) {
       // 400 tells Stripe not to retry — a bad signature will never become good.
+      console.warn(`REJECTED 400 — ${err.message}`);
       return new Response(`Signature verification failed: ${err.message}`, { status: 400 });
     }
 
     const purchase = extractPurchase(event);
-    if (!purchase) return new Response('Ignored', { status: 200 });
+    if (!purchase) {
+      console.log(`IGNORED 200 — ${event.type} (not a countable purchase)`);
+      return new Response('Ignored', { status: 200 });
+    }
+    console.log(`ACCEPTED 200 — ${event.type} id=${purchase.eventId} ${purchase.value} ${purchase.currency} email=${purchase.email ? 'yes' : 'none'}`);
 
     // Acknowledge Stripe immediately; Meta delivery continues in the background.
     // A slow Meta response must never make Stripe think the webhook failed.
@@ -139,10 +144,12 @@ async function sendToMeta(purchase, env) {
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(body),
     });
-    if (!res.ok) {
+    if (res.ok) {
+      console.log(`META OK   ${pixelId} — ${await res.text()}`);
+    } else {
       // Logged rather than thrown: one pixel failing must not stop the other,
       // and Stripe has already been acknowledged. Visible in `wrangler tail`.
-      console.error(`Meta ${pixelId} rejected the event: ${res.status} ${await res.text()}`);
+      console.error(`META FAIL ${pixelId} — ${res.status} ${await res.text()}`);
     }
   }));
 }
