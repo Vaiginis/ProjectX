@@ -14,6 +14,9 @@
  * Secrets (set with `wrangler secret put NAME`, never in wrangler.toml):
  *   STRIPE_WEBHOOK_SECRET   whsec_... from the Stripe webhook endpoint
  *   META_ACCESS_TOKEN       Events Manager -> Settings -> Conversions API
+ *   META_TOKEN_<pixel id>   optional, per-pixel override. A token only works
+ *                           for the pixel it was generated from, so a second
+ *                           pixel needs its own: META_TOKEN_28948852661366483
  *   META_TEST_EVENT_CODE    optional, only while testing
  */
 
@@ -138,7 +141,15 @@ async function sendToMeta(purchase, env) {
   if (env.META_TEST_EVENT_CODE) body.test_event_code = env.META_TEST_EVENT_CODE;
 
   await Promise.all(pixels.map(async (pixelId) => {
-    const url = `https://graph.facebook.com/${version}/${pixelId}/events?access_token=${encodeURIComponent(env.META_ACCESS_TOKEN)}`;
+    // Conversions API tokens are scoped to the pixel they were generated from,
+    // so two pixels normally need two tokens. Look for a per-pixel secret first
+    // and fall back to the shared one.
+    const token = env[`META_TOKEN_${pixelId}`] || env.META_ACCESS_TOKEN;
+    if (!token) {
+      console.error(`META SKIP ${pixelId} — no token (set META_TOKEN_${pixelId})`);
+      return;
+    }
+    const url = `https://graph.facebook.com/${version}/${pixelId}/events?access_token=${encodeURIComponent(token)}`;
     const res = await fetch(url, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },

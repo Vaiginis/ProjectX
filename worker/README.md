@@ -45,6 +45,16 @@ wrangler secret put STRIPE_WEBHOOK_SECRET   # whsec_… from the Stripe endpoint
 wrangler secret put META_ACCESS_TOKEN       # Events Manager → Settings → Conversions API
 ```
 
+A Conversions API token only works for the pixel it was generated from. With
+more than one pixel in `META_PIXEL_IDS`, give each its own token:
+
+```bash
+wrangler secret put META_TOKEN_28948852661366483
+```
+
+Without it that pixel logs `META FAIL … does not exist, cannot be loaded due to
+missing permissions` and never receives server-side events.
+
 Point Stripe at the Worker: Stripe → Developers → Webhooks → Add endpoint →
 the `workers.dev` URL `wrangler deploy` printed. Subscribe to
 `checkout.session.completed` and `invoice.paid`. Copy the signing secret it
